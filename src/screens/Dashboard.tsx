@@ -13,19 +13,25 @@ import {
     View,
 } from 'react-native';
 
+import { useSelector, useDispatch } from 'react-redux'
 
-
+import type { RootState } from '../redux/store'
+import commonStyles from '../assets/styles/commonStyles';
+import CustomButton from '../customComponents/CustomButton';
+import CustomText from '../customComponents/CustomText';
 
 
 
 
 
 const Dashboard = () => {
-
+    const theme = useSelector((state: RootState) => state.theme?.theme)
 
     return (
-        <View style={{ backgroundColor: "#000", flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <View style={[commonStyles.container, { backgroundColor: theme.primary }]}>
             <Text>Dashboard</Text>
+            <CustomText title={JSON.stringify(theme)} />
+            <CustomButton title="Click" />
         </View>
     );
 }

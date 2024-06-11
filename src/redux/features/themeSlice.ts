@@ -3,26 +3,26 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { stat } from 'fs'
 
+import lightTheme from '../../assets/theme/lightTheme'
 export interface CounterState {
-    userDetails: any
-
+    theme: any
 }
 
 const initialState: CounterState = {
-    userDetails: {}
+    theme: lightTheme
 }
 
 export const themeSlice = createSlice({
-    name: 'app',
+    name: 'theme',
     initialState,
     reducers: {
-        setUserDetails: (state, action: PayloadAction<any>) => {
-            state.userDetails = action.payload
+        setTheme: (state, action: PayloadAction<any>) => {
+            state.theme = action.payload
         },
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { setUserDetails } = themeSlice.actions
+export const { setTheme } = themeSlice.actions
 
 export default themeSlice.reducer
