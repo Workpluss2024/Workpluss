@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import OnboardingStack from './OnboardingStack';
 import Dashboard from '../screens/Dashboard';
+import HomeBottomTabStack from './HomeBottomTabStack';
 
 const Stack = createNativeStackNavigator();
 
@@ -48,15 +49,15 @@ export default function MainRouter() {
                     },
                 }}
             >
-
                 <Stack.Screen
-                    name="Dashboard"
-                    component={Dashboard}
+                    name="HomeBottomTabStack"
+                    component={HomeBottomTabStack}
                 />
                 <Stack.Screen
                     name="OnboardingStack"
                     component={OnboardingStack}
                 />
+
             </Stack.Navigator>
         </NavigationContainer>
     );

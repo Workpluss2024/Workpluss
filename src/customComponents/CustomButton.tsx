@@ -29,10 +29,14 @@ const CustomButton = (props: any) => {
     return (
         <Button
             mode="contained"
-            buttonColor={isFocused ? theme.red : theme.hover}
+            textColor={theme.white}
+            buttonColor={isFocused ? theme.hover : theme.violet}
             onPressIn={() => setIsFocused(true)}
             onPressOut={() => setIsFocused(false)}
-            style={{ borderRadius: 10 }}
+            style={{
+                borderRadius: 10,
+                marginTop: 50
+            }}
             onPress={() => console.log('Pressed')}>
             {props?.title}
         </Button>

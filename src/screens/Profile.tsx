@@ -24,12 +24,12 @@ import CustomText from '../customComponents/CustomText';
 
 
 
-const Dashboard = () => {
+const Profile = () => {
     const theme = useSelector((state: RootState) => state.theme?.theme)
 
     return (
         <View style={[commonStyles.container, { backgroundColor: theme.primary }]}>
-            <Text>Dashboard</Text>
+            <Text>Profile</Text>
             <CustomButton title="Click" />
         </View>
     );
@@ -37,6 +37,7 @@ const Dashboard = () => {
 
 const styles = StyleSheet.create({
 
+
 });
 
-export default Dashboard;
+export default Profile;
