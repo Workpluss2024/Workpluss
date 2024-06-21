@@ -77,7 +77,7 @@ export default function HomeBottomTabStack() {
                             style={styles.bottomTabButtons}
                         >
                             {label == "Home" && <Octicons name="home" size={size} color={isFocused ? theme?.yellow : theme.black} />}
-                            {label == "Dashboard" && <Image source={isFocused ? ImageDirectory.dashboardImageFocused : ImageDirectory.dashboardImage} style={styles.tabBarIcon} />}
+                            {label == "Dashboard" && <MaterialCommunityIcons name="view-dashboard-outline" size={size} color={isFocused ? theme?.yellow : theme.black} />}
                             {label == "Activity" && <Fontisto name="search" size={size} color={isFocused ? theme?.yellow : theme.black} />}
                             {label == "Profile" && <Image source={{ uri: 'https://cdn1.iconfinder.com/data/icons/user-pictures/101/malecostume-512.png' }} style={[styles.tabBarIcon, styles.tabBarIconProfile]} />}
                             {label != "Profile" && <Text Text style={{ color: isFocused ? theme?.yellow : theme.black }}>
@@ -95,8 +95,11 @@ export default function HomeBottomTabStack() {
 
 
     return (
-        <Tab.Navigator tabBar={props => <MyTabBar {...props} />}>
+        <Tab.Navigator
+            options={{ headerShown: false }}
+            tabBar={props => <MyTabBar {...props} />}>
             <Tab.Screen
+                options={{ headerShown: false }}
                 name="Home"
                 component={Home}
             />

@@ -21,6 +21,12 @@ import CustomButton from '../customComponents/CustomButton';
 import CustomText from '../customComponents/CustomText';
 
 
+import Background from '../assets/svgs/Background';
+
+import SvgUri from 'react-native-svg-uri';
+
+// import svgBackground from '../assets/svgs/back_ground.svg'
+// import svgBackgroundXML from '../assets/svgs/temp.xml'
 
 
 
@@ -29,8 +35,7 @@ const Dashboard = () => {
 
     return (
         <View style={[commonStyles.container, { backgroundColor: theme.primary }]}>
-            <Text>Dashboard</Text>
-            <CustomButton title="Click" />
+            <Background />
         </View>
     );
 }

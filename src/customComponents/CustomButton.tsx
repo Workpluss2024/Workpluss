@@ -34,6 +34,7 @@ const CustomButton = (props: any) => {
             onPressIn={() => setIsFocused(true)}
             onPressOut={() => setIsFocused(false)}
             style={{
+                ...props?.style,
                 borderRadius: 10,
                 marginTop: 50
             }}
