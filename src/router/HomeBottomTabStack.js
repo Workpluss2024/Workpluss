@@ -20,7 +20,10 @@ import Dashboard from '../screens/Dashboard';
 import Activity from '../screens/Activity';
 import Profile from '../screens/Profile';
 
+import CustomText from '../customComponents/CustomText';
+
 import ImageDirectory from '../assets/ImageDirectory';
+import FontDirectory from '../assets/FontDirectory';
 
 
 
@@ -33,9 +36,9 @@ export default function HomeBottomTabStack() {
 
 
     function MyTabBar( { state, descriptors, navigation } ) {
-        const size = 16
+        const size = 24
         return (
-            <View style={[styles.bottomTabContainer, { backgroundColor: theme.white, shadowColor: theme.black, }]}>
+            <View style={[styles.bottomTabContainer, { backgroundColor: theme.PrimaryBackground, shadowColor: theme.PrimaryText, }]}>
                 {state.routes.map( ( route, index ) => {
                     const { options } = descriptors[route.key];
                     const label =
@@ -68,6 +71,7 @@ export default function HomeBottomTabStack() {
 
                     return (
                         <TouchableOpacity
+                            key={label}
                             accessibilityRole="button"
                             accessibilityState={isFocused ? { selected: true } : {}}
                             accessibilityLabel={options.tabBarAccessibilityLabel}
@@ -76,11 +80,13 @@ export default function HomeBottomTabStack() {
                             onLongPress={onLongPress}
                             style={styles.bottomTabButtons}
                         >
-                            {label == "Home" && <Octicons name="home" size={size} color={isFocused ? theme?.yellow : theme.black} />}
-                            {label == "Dashboard" && <MaterialCommunityIcons name="view-dashboard-outline" size={size} color={isFocused ? theme?.yellow : theme.black} />}
-                            {label == "Activity" && <Fontisto name="search" size={size} color={isFocused ? theme?.yellow : theme.black} />}
-                            {label == "Profile" && <Image source={{ uri: 'https://cdn1.iconfinder.com/data/icons/user-pictures/101/malecostume-512.png' }} style={[styles.tabBarIcon, styles.tabBarIconProfile]} />}
-                            {label != "Profile" && <Text Text style={{ color: isFocused ? theme?.yellow : theme.black }}>
+                            {label == "Home" && <Octicons name="home" size={size} color={isFocused ? theme?.Secondary : theme.PrimaryText} />}
+                            {label == "Dashboard" && <MaterialCommunityIcons name="view-dashboard-outline" size={size} color={isFocused ? theme?.Secondary : theme.PrimaryText} />}
+                            {label == "Activity" && <Fontisto name="search" size={size} color={isFocused ? theme?.Secondary : theme.PrimaryText} />}
+                            {label == "Profile" && <View style={{ padding: 2, backgroundColor: isFocused ? theme?.Secondary : 'transparent', borderRadius: 50 }}>
+                                <Image source={{ uri: 'https://cdn1.iconfinder.com/data/icons/user-pictures/101/malecostume-512.png' }} style={[styles.tabBarIcon, styles.tabBarIconProfile]} />
+                            </View>}
+                            {label != "Profile" && <Text style={{ color: isFocused ? theme?.Secondary : theme.PrimaryText, fontFamily: FontDirectory.poppinsSemiBold, fontSize: 10 }}>
                                 {label}
                             </Text>}
                         </TouchableOpacity>

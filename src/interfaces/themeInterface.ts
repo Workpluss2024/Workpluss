@@ -1,15 +1,22 @@
 interface theme {
-    black: "string",
-    green: "string",
-    blue: "string",
-    grey: "string",
-    yellow: "string",
-    red: "string",
-    white: "string",
-    halfWhite: "string",
-    font: "string",
-    primary: "string",
-    fontBlack: "string",
-    hover: "string"
+    Primary: "string",
+    Secondary: "string",
+    Teritary: "string",
+    Alternate: "string",
+
+    PrimaryText: "string",
+    SecondaryText: "string",
+    PrimaryBackground: "string",
+    SecondaryBackground: "string",
+
+    Accent1: "string",
+    Accent2: "string",
+    Accent3: "string",
+    Accent4: "string",
+
+    Success: "string",
+    Error: "string",
+    Warning: "string",
+    Info: "string",
 }
 export default theme

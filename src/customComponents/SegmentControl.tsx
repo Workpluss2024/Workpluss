@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import FontDirectory from '../assets/FontDirectory';
 
 const SegmentedControl = (props: any) => {
 
@@ -68,10 +69,12 @@ const styles = StyleSheet.create({
     optionText: {
         color: '#ffffff', // Unselected text color
         fontSize: 12,
+        fontFamily: FontDirectory.PoppinsMedium
     },
     selectedText: {
         color: '#412C60', // Selected text color
-        fontSize: 12
+        fontSize: 12,
+        fontFamily: FontDirectory.PoppinsMedium
     },
 });
 

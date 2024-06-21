@@ -1,23 +1,24 @@
 import theme from "../../interfaces/themeInterface";
 const lightTheme: any = {
-    black: "#101014",
-    green: "#009D35",
-    blue: "#5218B8",
-    grey: "#C1C1C1",
-    // yellow: "#DE6717",
-    red: "#FF0000",
-    white: "#FFFFFF",
-    halfWhite: "#F4F1D0",
-    font: "#323232",
-    primary: "#D8D8D8",
-    fontBlack: "#000000",
-    hover: "#F7DCFC",
+    Primary: "#3A2850",
+    Secondary: "#F9A41D",
+    Teritary: "#EE8B60",
+    Alternate: "#E5E7EB",
 
+    PrimaryText: "#000000",
+    SecondaryText: "#1D0040",
+    PrimaryBackground: "#FFFFFF",
+    SecondaryBackground: "rgba(255,255,255,0.4)",
 
+    Accent1: "#3B3A5D",
+    Accent2: "#1F504C",
+    Accent3: "#553A30",
+    Accent4: "#A2A3A5",
 
-
-    violet: "#412C60",
-    yellow: "#F48F01"
+    Success: "#048178",
+    Error: "#FF5963",
+    Warning: "#FCDC0C",
+    Info: "#FFFFFF",
 }
 
 export default lightTheme;

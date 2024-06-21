@@ -18,6 +18,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import type { RootState } from '../redux/store'
 import commonStyles from '../assets/styles/commonStyles';
+import FontDirectory from '../assets/FontDirectory';
 
 
 
@@ -30,13 +31,17 @@ const CustomButton = (props: any) => {
         <Button
             mode="contained"
             textColor={theme.white}
-            buttonColor={isFocused ? theme.hover : theme.violet}
+            buttonColor={isFocused ? theme.SecondaryBackground : theme.Primary}
             onPressIn={() => setIsFocused(true)}
             onPressOut={() => setIsFocused(false)}
             style={{
                 ...props?.style,
                 borderRadius: 10,
-                marginTop: 50
+            }}
+            labelStyle={{
+                fontFamily: FontDirectory.PoppinsRegular,
+                fontSize: 12,
+                color: theme.Info
             }}
             onPress={() => console.log('Pressed')}>
             {props?.title}
