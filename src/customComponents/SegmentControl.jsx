@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import FontDirectory from '../assets/FontDirectory';
 
-const SegmentedControl = (props: any) => {
+const SegmentedControl = (props) => {
 
     return (
         <View style={styles.container}>

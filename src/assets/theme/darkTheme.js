@@ -1,4 +1,4 @@
-const darkTheme: any = {
+const darkTheme = {
     black: "#101014",
     green: "#009D35",
     blue: "#5218B8",

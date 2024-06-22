@@ -15,29 +15,28 @@ import {
 
 import { useSelector, useDispatch } from 'react-redux'
 
-import type { RootState } from '../redux/store'
+
 import commonStyles from '../assets/styles/commonStyles';
 import CustomButton from '../customComponents/CustomButton';
-import CustomText from '../customComponents/CustomText';
+import CustomText from '../customComponents/CustomText.jsx';
 
 
 
 
 
-const Profile = () => {
-    const theme = useSelector((state: RootState) => state.theme?.theme)
+const Activity = () => {
+    const theme = useSelector( ( state ) => state.theme?.theme )
 
     return (
         <View style={[commonStyles.container, { backgroundColor: theme.primary }]}>
-            <Text>Profile</Text>
+            <Text>Activity</Text>
             <CustomButton title="Click" />
         </View>
     );
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create( {
 
+} );
 
-});
-
-export default Profile;
+export default Activity;

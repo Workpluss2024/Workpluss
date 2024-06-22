@@ -8,4 +8,5 @@ export default FontDirectory = {
     poppinsSemiBold: 'Poppins-SemiBold',
     PoppinsMedium: 'Poppins-Medium',
     PoppinsRegular: 'Poppins-Regular',
+    PoppinsLight: 'Poppins-Light'
 }

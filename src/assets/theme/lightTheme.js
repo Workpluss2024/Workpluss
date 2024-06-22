@@ -1,5 +1,5 @@
-import theme from "../../interfaces/themeInterface";
-const lightTheme: any = {
+
+const lightTheme = {
     Primary: "#3A2850",
     Secondary: "#F9A41D",
     Teritary: "#EE8B60",
