@@ -9,6 +9,7 @@ const lightTheme = {
     SecondaryText: "#1D0040",
     PrimaryBackground: "#FFFFFF",
     SecondaryBackground: "rgba(255,255,255,0.4)",
+    MenuNavigatorBottom: "rgba(255,255,255,0.55)",
 
     Accent1: "#3B3A5D",
     Accent2: "#1F504C",

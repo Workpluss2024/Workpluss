@@ -138,7 +138,7 @@ const styles = StyleSheet.create( {
     },
     bottomTabContainer: {
         height: 56,
-        marginBottom: 20,
+        marginBottom: 6,
         position: 'absolute',
         bottom: 10,
         borderRadius: 50,

@@ -23,33 +23,33 @@ import FontDirectory from '../assets/FontDirectory';
 
 
 
-const CustomButton = (props) => {
-    const theme = useSelector((state) => state.theme?.theme)
-    const [isFocused, setIsFocused] = useState(false)
+const CustomButton = ( props ) => {
+    const theme = useSelector( ( state ) => state.theme?.theme )
+    const [isFocused, setIsFocused] = useState( false )
     return (
         <Button
             mode="contained"
             textColor={theme.white}
             buttonColor={isFocused ? theme.SecondaryBackground : theme.Primary}
-            onPressIn={() => setIsFocused(true)}
-            onPressOut={() => setIsFocused(false)}
+            onPressIn={() => setIsFocused( true )}
+            onPressOut={() => setIsFocused( false )}
             style={{
                 ...props?.style,
-                borderRadius: 10,
+                borderRadius: 50,
             }}
             labelStyle={{
                 fontFamily: FontDirectory.PoppinsRegular,
-                fontSize: 12,
+                fontSize: props?.fontSize ? props?.fontSize : 12,
                 color: theme.Info
             }}
-            onPress={() => console.log('Pressed')}>
+            onPress={() => console.log( 'Pressed' )}>
             {props?.title}
         </Button>
     );
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create( {
 
-});
+} );
 
 export default CustomButton;

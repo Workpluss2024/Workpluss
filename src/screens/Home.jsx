@@ -15,7 +15,8 @@ import {
     Dimensions,
     ImageBackground,
     ScrollView,
-    TouchableOpacity
+    TouchableOpacity,
+    FlatList
 } from 'react-native';
 
 import { useSelector, useDispatch } from 'react-redux'
@@ -27,6 +28,7 @@ import ImageDirectory from '../assets/ImageDirectory';
 import SegmentedControl from '../customComponents/SegmentControl';
 import { Ionicons, MaterialIcons, Entypo } from 'react-native-vector-icons';
 import JobPostingComponent from '../customComponents/JobPostingComponent';
+import JobPostingComponentTopCard from '../customComponents/JobPostingComponentTopCard';
 
 
 
@@ -34,6 +36,7 @@ import JobPostingComponent from '../customComponents/JobPostingComponent';
 const windowWidth = Dimensions.get( 'window' ).width;
 const windowHeight = Dimensions.get( 'window' ).height;
 
+const JOB_LIST = [1, 2, 3, 4]
 
 const Home = () => {
     const theme = useSelector( ( state ) => state.theme?.theme )
@@ -47,11 +50,23 @@ const Home = () => {
             source={ImageDirectory.full_background}
             imageStyle={{ resizeMode: 'stretch', height: windowHeight, width: windowWidth }}
         >
-            <ScrollView style={{ flex: 1 }}>
-                <JobPostingComponent />
+            <View>
+                <View style={{ height: windowHeight * 0.47 }}>
+                    <FlatList
+                        horizontal={true}
+                        data={JOB_LIST}
+                        renderItem={( props ) => <JobPostingComponentTopCard props={props} />}
+                        keyExtractor={item => item}
+                    />
+                </View>
+                <FlatList
+                    data={JOB_LIST}
+                    renderItem={( props ) => <JobPostingComponent props={props} />}
+                    keyExtractor={item => item}
+                />
+                <View style={{ height: 80 }} />
 
-            </ScrollView>
-
+            </View>
 
         </ImageBackground>
     );
