@@ -38,7 +38,7 @@ const CustomButton = ( props ) => {
                 borderRadius: 50,
             }}
             labelStyle={{
-                fontFamily: FontDirectory.PoppinsRegular,
+                fontFamily: props?.fontFamily ? props?.fontFamily : FontDirectory.PoppinsRegular,
                 fontSize: props?.fontSize ? props?.fontSize : 12,
                 color: theme.Info
             }}

@@ -2580,6 +2580,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native/normalize-colors@npm:<0.73.0":
+  version: 0.72.0
+  resolution: "@react-native/normalize-colors@npm:0.72.0"
+  checksum: c8ec577663394a3390eb34c3cd531350521172bcfad7de309ab111e5f9e3d27c966d4a4387f00972302107be3d8cad584c5794ccfa30939aecc56162e4ddbe25
+  languageName: node
+  linkType: hard
+
 "@react-native/typescript-config@npm:0.74.84":
   version: 0.74.84
   resolution: "@react-native/typescript-config@npm:0.74.84"
@@ -3199,6 +3206,7 @@ __metadata:
     react: 18.2.0
     react-native: 0.74.2
     react-native-asset: ^2.1.1
+    react-native-flip-card: ^3.5.7
     react-native-gesture-handler: ^2.16.2
     react-native-paper: ^5.12.3
     react-native-reanimated: ^3.12.0
@@ -4525,6 +4533,17 @@ __metadata:
   version: 2.0.0
   resolution: "depd@npm:2.0.0"
   checksum: abbe19c768c97ee2eed6282d8ce3031126662252c58d711f646921c9623f9052e3e1906443066beec1095832f534e57c523b7333f8e7e0d93051ab6baef5ab3a
+  languageName: node
+  linkType: hard
+
+"deprecated-react-native-prop-types@npm:^4.0.0":
+  version: 4.2.3
+  resolution: "deprecated-react-native-prop-types@npm:4.2.3"
+  dependencies:
+    "@react-native/normalize-colors": <0.73.0
+    invariant: ^2.2.4
+    prop-types: ^15.8.1
+  checksum: 294752f9f15733b66473022d8258a14aac850e4a3db7e802ef189a09871236f5a110f8fe588468ae1df92f24641ae29de05943074dc54da02a5e4262935f913d
   languageName: node
   linkType: hard
 
@@ -8586,6 +8605,16 @@ __metadata:
   bin:
     react-native-asset: lib/cli.js
   checksum: 6c7dcc0b359b14e46de9872bceadfc1fdd68174787a1243ea53285577dcba7a028fd19a89be3e1ecbbc30817ec38c2ebb822d4d57d096d724c56e0ef9c61d587
+  languageName: node
+  linkType: hard
+
+"react-native-flip-card@npm:^3.5.7":
+  version: 3.5.7
+  resolution: "react-native-flip-card@npm:3.5.7"
+  dependencies:
+    deprecated-react-native-prop-types: ^4.0.0
+    prop-types: ^15.8.1
+  checksum: 815126a104f7c0e6eb5fc6504ec627f43e96d411672bedc4ebf2a562a1f782dd55964b6c3abdb3769c4e5c035cbf2940e0c011e5a6d21c53fa6505e8c6952003
   languageName: node
   linkType: hard
 

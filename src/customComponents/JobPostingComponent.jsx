@@ -109,7 +109,7 @@ const styles = StyleSheet.create( {
         flex: 1,
         padding: 16,
         borderRadius: 12,
-        width: windowWidth * 0.96,
+        width: windowWidth * 0.94,
         alignSelf: 'center',
         marginVertical: 8
     },

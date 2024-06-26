@@ -42,6 +42,7 @@ const Home = () => {
     const theme = useSelector( ( state ) => state.theme?.theme )
 
     const [selectedOption, setSelectedOption] = useState( 'JOBS' ); // Default selected option
+    
 
 
     return (
