@@ -30,7 +30,7 @@ const JobPostingComponentTopCard = ( props ) => {
 
     return (
         <FlipCard
-            style={{}}
+            style={{ height: windowHeight * 0.47 }}
             friction={6}
             perspective={1000}
             flipHorizontal={true}
@@ -100,8 +100,9 @@ const styles = StyleSheet.create( {
         marginVertical: 12,
         width: windowWidth * 0.94,
         alignItems: 'center',
-        marginHorizontal: windowWidth * 0.03
-        // elevation: 1,
+        marginHorizontal: windowWidth * 0.03,
+        height: windowHeight * 0.43,
+        elevation: 5,
     },
     header: {
         flexDirection: 'row',

@@ -21,7 +21,7 @@ import FontDirectory from '../assets/FontDirectory';
 
 
 
-
+const AVAILABLE_LANGUAGE_LIST = ["English", "Hindi", "Marathi"]
 
 const CustomButton = ( props ) => {
     const theme = useSelector( ( state ) => state.theme?.theme )
@@ -33,14 +33,16 @@ const CustomButton = ( props ) => {
             buttonColor={isFocused ? theme.SecondaryBackground : theme.Primary}
             onPressIn={() => setIsFocused( true )}
             onPressOut={() => setIsFocused( false )}
-            style={{
+            style={[props?.dflt && { height: 56 }, {
+                borderRadius: props?.dflt ? 10 : 50,
+                justifyContent: 'center',
+                alignItems: 'center',
                 ...props?.style,
-                borderRadius: 50,
-            }}
+            }]}
             labelStyle={{
-                fontFamily: props?.fontFamily ? props?.fontFamily : FontDirectory.PoppinsRegular,
+                fontFamily: props?.fontFamily ? props?.fontFamily : FontDirectory.poppinsSemiBold,
                 fontSize: props?.fontSize ? props?.fontSize : 12,
-                color: theme.Info
+                color: theme.Alternate
             }}
             onPress={() => console.log( 'Pressed' )}>
             {props?.title}

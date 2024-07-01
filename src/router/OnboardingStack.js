@@ -4,13 +4,19 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 
 
+import SplashScreen from '../screens/onBoarding/SplashScreen';
+import LanguageSelect from '../screens/onBoarding/LanguageSelect';
+import PasswordChangeConfirmationPage from '../screens/onBoarding/PasswordChangeConfirmationPage';
+import PhoneNumberVerifiedConfirmationPage from '../screens/onBoarding/PhoneNumberVerifiedConfirmationPage';
+
+
 
 const Stack = createStackNavigator();
 
 export default function OnboardingStack() {
     return (
         <Stack.Navigator
-            initialRouteName='ChooseLanguage'
+            initialRouteName='PhoneNumberVerifiedConfirmationPage'
             screenOptions={{
                 headerShown: false,
                 gestureEnabled: true,
@@ -48,6 +54,10 @@ export default function OnboardingStack() {
             }}
         >
 
+            <Stack.Screen name="SplashScreen" component={SplashScreen} />
+            <Stack.Screen name="LanguageSelect" component={LanguageSelect} />
+            <Stack.Screen name="PasswordChangeConfirmationPage" component={PasswordChangeConfirmationPage} />
+            <Stack.Screen name="PhoneNumberVerifiedConfirmationPage" component={PhoneNumberVerifiedConfirmationPage} />
 
         </Stack.Navigator>
     );

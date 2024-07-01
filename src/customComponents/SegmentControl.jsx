@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import FontDirectory from '../assets/FontDirectory';
 
-const SegmentedControl = (props) => {
+const SegmentedControl = ( props ) => {
 
     return (
         <View style={styles.container}>
@@ -11,7 +11,7 @@ const SegmentedControl = (props) => {
                     styles.option,
                     props?.selectedOption === props?.segment1 && styles.selectedOption
                 ]}
-                onPress={() => props?.setSelectedOption(props?.segment1)}
+                onPress={() => props?.setSelectedOption( props?.segment1 )}
             >
                 <Text
                     style={[
@@ -28,7 +28,7 @@ const SegmentedControl = (props) => {
                     styles.option,
                     props?.selectedOption === props?.segment2 && styles.selectedOption
                 ]}
-                onPress={() => props?.setSelectedOption(props?.segment2)}
+                onPress={() => props?.setSelectedOption( props?.segment2 )}
             >
                 <Text
                     style={[
@@ -43,14 +43,14 @@ const SegmentedControl = (props) => {
     );
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create( {
     container: {
         flexDirection: 'row',
         borderRadius: 50,
         borderWidth: 1,
         backgroundColor: '#412C60',
         overflow: 'hidden',
-        height: 36,
+        height: 32,
         width: 120,
         padding: 4
     },
@@ -64,7 +64,16 @@ const styles = StyleSheet.create({
     selectedOption: {
         backgroundColor: '#ffffff', // Selected background color
         borderRadius: 50,
-        paddingVertical: 2
+        paddingVertical: 2,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.20,
+        shadowRadius: 1.41,
+
+        elevation: 2,
     },
     optionText: {
         color: '#ffffff', // Unselected text color
@@ -76,6 +85,6 @@ const styles = StyleSheet.create({
         fontSize: 12,
         fontFamily: FontDirectory.PoppinsMedium
     },
-});
+} );
 
 export default SegmentedControl;
