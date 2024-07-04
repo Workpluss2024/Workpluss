@@ -22,7 +22,16 @@ const commonStyles = StyleSheet.create( {
         minHeight: windowHeight,
         minWidth: windowWidth,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+    },
+    headerContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        height: 65,
+        paddingLeft: 16
+    },
+    headerLeftArrow: {
+        marginRight: 24
     }
 } );
 
