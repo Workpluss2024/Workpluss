@@ -45,7 +45,7 @@ const windowWidth = Dimensions.get( 'window' ).width;
 const windowHeight = Dimensions.get( 'window' ).height;
 
 
-const CreateAnAccount = () => {
+const CreateAnAccount = ( props ) => {
 
     const theme = useSelector( ( state ) => state.theme?.theme )
 
@@ -54,6 +54,11 @@ const CreateAnAccount = () => {
     const [selectedLanguage, setSelectedLanguage] = useState( "English" )
 
     const [searchQuery, setSearchQuery] = useState( '' );
+
+
+    const handleNext = () => {
+        props.navigation.navigate( "ThirdPartyLoginOptions" )
+    }
 
     return (
         <ImageBackground
@@ -66,18 +71,20 @@ const CreateAnAccount = () => {
 
                     <View style={commonStyles.contentContainer}>
                         <CustomText title="Create an Account" fontFamily={FontDirectory.poppinsBold} fontSize={24} color={theme.Primary} />
-                        <TouchableOpacity style={{
-                            height: 44,
-                            width: 44,
-                            borderRadius: 50,
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            marginTop: 18
-                        }}>
+                        <TouchableOpacity
+                            onPress={() => handleNext()}
+                            style={{
+                                height: 44,
+                                width: 44,
+                                borderRadius: 50,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                marginTop: 18
+                            }}>
                             <Image source={ImageDirectory.right_arrow_in_circle} style={{ height: 42, width: 42, resizeMode: 'contain' }} />
 
                         </TouchableOpacity>
-                        <SkipForNowComponent absolute />
+                        <SkipForNowComponent absolute onSkip={() => handleNext()} />
                     </View>
                 </ScrollView>
 

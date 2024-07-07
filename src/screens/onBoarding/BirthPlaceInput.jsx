@@ -42,6 +42,7 @@ import { RadioButton } from 'react-native-paper';
 
 import { Searchbar } from 'react-native-paper';
 import SkipForNowComponent from '../../customComponents/SkipForNowComponent';
+import TopProgressBar from '../../customComponents/TopProgressBar';
 
 const windowWidth = Dimensions.get( 'window' ).width;
 const windowHeight = Dimensions.get( 'window' ).height;
@@ -70,6 +71,7 @@ const BirthPlaceInput = () => {
                     </TouchableOpacity>
                     <CustomText title="Birth place" fontFamily={FontDirectory.poppinsBold} color={theme.Primary} fontSize={24} />
                 </View>
+                <TopProgressBar totalPageCount={10} completedPage={6} />
                 <ScrollView style={commonStyles.scrollViewContainer}>
 
                     <View style={[commonStyles.contentContainer, { minHeight: windowHeight - 65 }]}>
@@ -81,7 +83,7 @@ const BirthPlaceInput = () => {
                                 <CustomText title="Birth place" fontFamily={FontDirectory.PoppinsMedium} fontSize={14} color={theme.Primary} />
                                 <View style={[styles.inputOuterContainer, { backgroundColor: theme.SecondaryBackground }]}>
                                     <TextInput
-                                        placeholder="Birth Place"
+                                        placeholder="City"
                                         keyboardType="text"
                                         placeholderTextColor={theme.Primary}
                                         fontFamily={FontDirectory.interRegular}
@@ -94,7 +96,7 @@ const BirthPlaceInput = () => {
                                 <CustomText title="Country of Birth" fontFamily={FontDirectory.PoppinsMedium} fontSize={14} color={theme.Primary} />
                                 <View style={[styles.inputOuterContainer, { backgroundColor: theme.SecondaryBackground }]}>
                                     <TextInput
-                                        placeholder="Country of Birth"
+                                        placeholder="Country"
                                         keyboardType="text"
                                         placeholderTextColor={theme.Primary}
                                         fontFamily={FontDirectory.interRegular}

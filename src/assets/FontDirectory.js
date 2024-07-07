@@ -12,5 +12,7 @@ export default FontDirectory = {
 
 
 
-    interRegular: 'Poppins-Regular'
+    interRegular: 'Poppins-Regular',
+    interMixed: 'Poppins-Medium',
+    interSemiBold: 'Poppins-SemiBold'
 }

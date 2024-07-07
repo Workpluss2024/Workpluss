@@ -34,7 +34,7 @@ const SkipForNowComponent = ( props ) => {
             styles?.container, {
                 ...props?.style
             }]}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => props?.onSkip()}>
                 <CustomText title="Skip now" fontFamily={FontDirectory.interRegular} fontSize={14} style={styles.skipNowText} />
             </TouchableOpacity>
 

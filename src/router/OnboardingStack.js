@@ -18,6 +18,7 @@ import NameConfirmationPage from '../screens/onBoarding/NameConfirmationPage';
 import BirthPlaceInput from '../screens/onBoarding/BirthPlaceInput';
 import DateOfBirthInput from '../screens/onBoarding/DateOfBirthInput';
 import WorkPreference from '../screens/onBoarding/WorkPreference';
+import UploadDocuments from '../screens/onBoarding/UploadDocuments';
 
 
 
@@ -26,7 +27,7 @@ const Stack = createStackNavigator();
 export default function OnboardingStack() {
     return (
         <Stack.Navigator
-            initialRouteName='WorkPreference'
+            initialRouteName='UploadDocuments'
             screenOptions={{
                 headerShown: false,
                 gestureEnabled: true,
@@ -78,6 +79,7 @@ export default function OnboardingStack() {
             <Stack.Screen name="BirthPlaceInput" component={BirthPlaceInput} />
             <Stack.Screen name="DateOfBirthInput" component={DateOfBirthInput} />
             <Stack.Screen name="WorkPreference" component={WorkPreference} />
+            <Stack.Screen name="UploadDocuments" component={UploadDocuments} />
 
         </Stack.Navigator>
     );

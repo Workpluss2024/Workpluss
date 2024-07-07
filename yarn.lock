@@ -3207,6 +3207,7 @@ __metadata:
     react-native: 0.74.2
     react-native-asset: ^2.1.1
     react-native-date-picker: ^5.0.4
+    react-native-dropdown-picker: ^5.4.6
     react-native-flip-card: ^3.5.7
     react-native-gesture-handler: ^2.16.2
     react-native-paper: ^5.12.3
@@ -8616,6 +8617,16 @@ __metadata:
     react: ">= 17.0.1"
     react-native: ">= 0.64.3"
   checksum: 67db7fba5de613c61a70b5b9274daef8c7d3b6f6cdc5a6063eb61126d4df43252c501c2cb78ebda37fb0997ccb0994e949976d0fb395453580019923100e03ad
+  languageName: node
+  linkType: hard
+
+"react-native-dropdown-picker@npm:^5.4.6":
+  version: 5.4.6
+  resolution: "react-native-dropdown-picker@npm:5.4.6"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: d81ee3d68c17107a4d21dbdf9c2fe2ffe4bf4398973d10113139aadc0674221ce5038b945299fba2abc796930ec5e6d5f84291945bf903344493a15b8e2fca43
   languageName: node
   linkType: hard
 

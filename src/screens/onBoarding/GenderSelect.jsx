@@ -40,6 +40,7 @@ import { RadioButton } from 'react-native-paper';
 
 import { Searchbar } from 'react-native-paper';
 import SkipForNowComponent from '../../customComponents/SkipForNowComponent';
+import TopProgressBar from '../../customComponents/TopProgressBar';
 
 const windowWidth = Dimensions.get( 'window' ).width;
 const windowHeight = Dimensions.get( 'window' ).height;
@@ -68,6 +69,7 @@ const GenderSelect = () => {
                     </TouchableOpacity>
                     <CustomText title="Gender" fontFamily={FontDirectory.poppinsBold} color={theme.Primary} fontSize={24} />
                 </View>
+                <TopProgressBar totalPageCount={10} completedPage={3} />
                 <ScrollView style={commonStyles.scrollViewContainer}>
 
                     <View style={commonStyles.contentContainer}>

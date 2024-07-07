@@ -45,7 +45,7 @@ const windowWidth = Dimensions.get( 'window' ).width;
 const windowHeight = Dimensions.get( 'window' ).height;
 
 
-const ThirdPartyLoginOptions = () => {
+const ThirdPartyLoginOptions = ( props ) => {
 
     const theme = useSelector( ( state ) => state.theme?.theme )
 
@@ -54,6 +54,11 @@ const ThirdPartyLoginOptions = () => {
     const [selectedLanguage, setSelectedLanguage] = useState( "English" )
 
     const [searchQuery, setSearchQuery] = useState( '' );
+
+
+    const handleNext = () => {
+        props.navigation.navigate( "PhoneEmailInputPage" )
+    }
 
     return (
         <ImageBackground
@@ -83,7 +88,7 @@ const ThirdPartyLoginOptions = () => {
 
 
 
-                        <SkipForNowComponent />
+                        <SkipForNowComponent onSkip={() => handleNext()} absolute />
                     </View>
                 </ScrollView>
 

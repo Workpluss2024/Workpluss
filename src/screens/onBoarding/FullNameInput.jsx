@@ -42,6 +42,7 @@ import { RadioButton } from 'react-native-paper';
 
 import { Searchbar } from 'react-native-paper';
 import SkipForNowComponent from '../../customComponents/SkipForNowComponent';
+import TopProgressBar from '../../customComponents/TopProgressBar';
 
 const windowWidth = Dimensions.get( 'window' ).width;
 const windowHeight = Dimensions.get( 'window' ).height;
@@ -68,8 +69,9 @@ const FullNameInput = () => {
                     <TouchableOpacity>
                         <FontAwesome5 name="chevron-left" color={theme.Primary} size={24} style={commonStyles.headerLeftArrow} />
                     </TouchableOpacity>
-                    <CustomText title="Full Name" fontFamily={FontDirectory.poppinsBold} color={theme.Primary} fontSize={24} />
+                    <CustomText title="Name" fontFamily={FontDirectory.poppinsBold} color={theme.Primary} fontSize={24} />
                 </View>
+                <TopProgressBar totalPageCount={10} completedPage={4} />
                 <ScrollView style={commonStyles.scrollViewContainer}>
 
                     <View style={[commonStyles.contentContainer, { minHeight: windowHeight - 65 }]}>
@@ -78,7 +80,7 @@ const FullNameInput = () => {
 
                         <View style={styles.container}>
                             <View>
-                                <CustomText title="Full Name" fontFamily={FontDirectory.PoppinsMedium} fontSize={14} color={theme.Primary} />
+                                {/* <CustomText title="Name" fontFamily={FontDirectory.PoppinsMedium} fontSize={14} color={theme.Primary} /> */}
                                 <View style={[styles.inputOuterContainer, { backgroundColor: theme.SecondaryBackground }]}>
                                     <TextInput
                                         placeholder="First name"
@@ -91,7 +93,7 @@ const FullNameInput = () => {
                                 </View>
                                 <View style={[styles.inputOuterContainer, { backgroundColor: theme.SecondaryBackground }]}>
                                     <TextInput
-                                        placeholder="Sur name"
+                                        placeholder="Last name"
                                         keyboardType="text"
                                         placeholderTextColor={theme.Primary}
                                         fontFamily={FontDirectory.interRegular}

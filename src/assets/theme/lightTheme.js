@@ -15,11 +15,15 @@ const lightTheme = {
     Accent2: "#1F504C",
     Accent3: "#553A30",
     Accent4: "#A2A3A5",
+    Accent5: "#B80000",
+    Accent6: "#179E38",
 
     Success: "#048178",
     Error: "#FF5963",
     Warning: "#FCDC0C",
     Info: "#FFFFFF",
+
+    Transparent: 'transparent'
 }
 
 export default lightTheme;

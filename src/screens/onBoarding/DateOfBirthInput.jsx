@@ -43,6 +43,7 @@ import { RadioButton } from 'react-native-paper';
 
 import { Searchbar } from 'react-native-paper';
 import SkipForNowComponent from '../../customComponents/SkipForNowComponent';
+import TopProgressBar from '../../customComponents/TopProgressBar';
 
 const windowWidth = Dimensions.get( 'window' ).width;
 const windowHeight = Dimensions.get( 'window' ).height;
@@ -70,6 +71,7 @@ const DateOfBirthInput = () => {
                     </TouchableOpacity>
                     <CustomText title="Date of birth" fontFamily={FontDirectory.poppinsBold} color={theme.Primary} fontSize={24} />
                 </View>
+                <TopProgressBar totalPageCount={10} completedPage={7} />
                 <ScrollView style={commonStyles.scrollViewContainer}>
 
                     <View style={[commonStyles.contentContainer, { minHeight: windowHeight - 65 }]}>

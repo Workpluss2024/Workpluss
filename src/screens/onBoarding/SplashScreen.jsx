@@ -5,7 +5,7 @@
  * @format
  */
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 
 import {
     StyleSheet,
@@ -43,9 +43,15 @@ const windowWidth = Dimensions.get( 'window' ).width;
 const windowHeight = Dimensions.get( 'window' ).height;
 
 
-const SplashScreen = () => {
+const SplashScreen = ( props ) => {
 
     const theme = useSelector( ( state ) => state.theme?.theme )
+    const nagigateToNextPage = () => {
+        setTimeout( () => { props.navigation.navigate( "LanguageSelect" ) }, 1000 )
+    }
+    useEffect( () => {
+        nagigateToNextPage()
+    }, [] )
 
     return (
         <ImageBackground

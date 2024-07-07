@@ -44,7 +44,7 @@ const windowWidth = Dimensions.get( 'window' ).width;
 const windowHeight = Dimensions.get( 'window' ).height;
 
 
-const LanguageSelect = () => {
+const LanguageSelect = ( props ) => {
 
     const theme = useSelector( ( state ) => state.theme?.theme )
 
@@ -53,6 +53,10 @@ const LanguageSelect = () => {
     const [selectedLanguage, setSelectedLanguage] = useState( "English" )
 
     const [searchQuery, setSearchQuery] = useState( '' );
+
+    const handleNext = () => {
+        props.navigation.navigate( "CreateAnAccount" )
+    }
 
     return (
         <ImageBackground
@@ -97,7 +101,7 @@ const LanguageSelect = () => {
                                         onPress={() => setSelectedLanguage( eachLanguage )}
                                         key={index}
                                         style={[styles?.languageButtonContainer, isSelected && { backgroundColor: theme.SecondaryBackground }, true && { borderColor: theme.SecondaryBackground, borderWidth: 2 }]}>
-                                        <CustomText fontSize={16 } title={eachLanguage} color={isSelected ? theme.PrimaryText : theme.PrimaryBackground} fontFamily={FontDirectory.PoppinsMedium} />
+                                        <CustomText fontSize={16} title={eachLanguage} color={isSelected ? theme.PrimaryText : theme.PrimaryBackground} fontFamily={FontDirectory.PoppinsMedium} />
                                         <View style={[styles?.languageCheckContainer, { backgroundColor: isSelected ? theme.PrimaryText : theme.PrimaryBackground }]}>
                                             <Feather name="check" size={10} color={isSelected ? theme.PrimaryBackground : theme.PrimaryText} />
                                         </View>
@@ -106,7 +110,9 @@ const LanguageSelect = () => {
                             } )}
 
 
-                            <CustomButton title="Continue" fontSize={16} dflt={true} style={{ marginTop: 18 }} />
+                            <CustomButton
+                                onPress={() => handleNext()}
+                                title="Continue" fontSize={16} dflt={true} style={{ marginTop: 18 }} />
                         </View>
                     </View>
                 </ScrollView>

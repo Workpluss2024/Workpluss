@@ -44,7 +44,7 @@ const CustomButton = ( props ) => {
                 fontSize: props?.fontSize ? props?.fontSize : 12,
                 color: theme.Alternate
             }}
-            onPress={() => console.log( 'Pressed' )}>
+            onPress={() => props?.onPress()}>
             {props?.title}
         </Button>
     );
