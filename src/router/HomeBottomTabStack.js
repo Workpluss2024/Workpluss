@@ -11,20 +11,21 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Octicons from 'react-native-vector-icons/Octicons';
-import Fontisto from 'react-native-vector-icons/Fontisto';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import OnboardingStack from './OnboardingStack';
 
 import Home from '../screens/Home';
 import Dashboard from '../screens/Dashboard';
-import Activity from '../screens/Activity';
+import Schedule from '../screens/Schedule';
 import Profile from '../screens/Profile';
 
 import CustomText from '../customComponents/CustomText';
 
 import ImageDirectory from '../assets/ImageDirectory';
 import FontDirectory from '../assets/FontDirectory';
-
+import ProfileStack from './ProfileStack';
+import HomeStack from './HomeStack';
 
 
 const Tab = createBottomTabNavigator();
@@ -82,7 +83,7 @@ export default function HomeBottomTabStack() {
                         >
                             {label == "Home" && <Octicons name="home" size={size} color={isFocused ? theme?.Secondary : theme.PrimaryText} />}
                             {label == "Dashboard" && <MaterialCommunityIcons name="view-dashboard-outline" size={size} color={isFocused ? theme?.Secondary : theme.PrimaryText} />}
-                            {label == "Activity" && <Fontisto name="search" size={size} color={isFocused ? theme?.Secondary : theme.PrimaryText} />}
+                            {label == "Schedule" && <AntDesign name="checkcircleo" size={size} color={isFocused ? theme?.Secondary : theme.PrimaryText} />}
                             {label == "Profile" && <View style={{ padding: 2, backgroundColor: isFocused ? theme?.Secondary : 'transparent', borderRadius: 50 }}>
                                 <Image source={{ uri: 'https://cdn1.iconfinder.com/data/icons/user-pictures/101/malecostume-512.png' }} style={[styles.tabBarIcon, styles.tabBarIconProfile]} />
                             </View>}
@@ -107,19 +108,22 @@ export default function HomeBottomTabStack() {
             <Tab.Screen
                 options={{ headerShown: false }}
                 name="Home"
-                component={Home}
+                component={HomeStack}
             />
             <Tab.Screen
+                options={{ headerShown: false }}
                 name="Dashboard"
                 component={Dashboard}
             />
             <Tab.Screen
-                name="Activity"
-                component={Activity}
+                options={{ headerShown: false }}
+                name="Schedule"
+                component={Schedule}
             />
             <Tab.Screen
+                options={{ headerShown: false }}
                 name="Profile"
-                component={Profile}
+                component={ProfileStack}
             />
         </Tab.Navigator>
     );

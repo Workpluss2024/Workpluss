@@ -102,7 +102,6 @@ const styles = StyleSheet.create( {
         alignItems: 'center',
         marginHorizontal: windowWidth * 0.03,
         height: windowHeight * 0.43,
-        elevation: 5,
     },
     header: {
         flexDirection: 'row',

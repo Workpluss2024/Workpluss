@@ -12,7 +12,7 @@ export default function MainRouter() {
     return (
         <NavigationContainer>
             <Stack.Navigator
-                initialRouteName='OnboardingStack'
+                initialRouteName='HomeBottomTabStack'
                 screenOptions={{
                     headerShown: false,
                     gestureEnabled: true,

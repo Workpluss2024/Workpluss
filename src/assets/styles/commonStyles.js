@@ -19,7 +19,7 @@ const commonStyles = StyleSheet.create( {
         flex: 1
     },
     contentContainer: {
-        minHeight: windowHeight,
+        // minHeight: windowHeight,
         minWidth: windowWidth,
         justifyContent: 'center',
         alignItems: 'center',
@@ -32,7 +32,46 @@ const commonStyles = StyleSheet.create( {
     },
     headerLeftArrow: {
         marginRight: 24
-    }
+    },
+    inputOuterContainer: {
+        flexDirection: 'row',
+        width: windowWidth * 0.88,
+        borderRadius: 10,
+        height: 50,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal: 8,
+        marginTop: 6
+    },
+    input: {
+        flex: 1,
+    },
+
+    rowSpaceBetween: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+
+
+
+
+    inputOuterContainer: {
+        flexDirection: 'row',
+        width: windowWidth * 0.88,
+        borderRadius: 10,
+        height: 50,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal: 8,
+        marginTop: 6
+    },
+
+    input: {
+        flex: 1,
+    },
+    inputHeader: {
+        marginTop: 18
+    },
 } );
 
 export default commonStyles;

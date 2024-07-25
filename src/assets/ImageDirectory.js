@@ -7,6 +7,7 @@ import right_arrow_in_circle from './images/right_arrow_in_circle.png'
 import login_facebook from './images/login_facebook.png'
 import login_google from './images/login_google.png'
 import login_apple from './images/login_apple.png'
+import confirmation_modal_background from './images/confirmation_modal_background.png'
 
 
 
@@ -20,5 +21,6 @@ export default ImageDirectory = {
     right_arrow_in_circle,
     login_facebook,
     login_google,
-    login_apple
+    login_apple,
+    confirmation_modal_background
 }

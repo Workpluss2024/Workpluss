@@ -35,6 +35,9 @@ import CustomDots from '../customComponents/CustomDots';
 
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import JobStatusComponent from '../customComponents/JobStatusComponent';
+import SegmentControl3 from '../customComponents/SegmentControl3';
 
 
 
@@ -44,10 +47,17 @@ const windowHeight = Dimensions.get( 'window' ).height;
 
 const JOB_LIST = [1, 2, 3, 4]
 
-const Home = () => {
+const JOB_LIST_DATE_WISE = [
+    { date: "MAY 22, 2024", jobs: [1, 2] },
+    { date: "MAY 23, 2024", jobs: [1, 2] },
+    { date: "MAY 24, 2024", jobs: [1, 2] }
+]
+
+const Home = ( props ) => {
     const theme = useSelector( ( state ) => state.theme?.theme )
 
     const [selectedOption, setSelectedOption] = useState( 'JOBS' ); // Default selected option
+    const [selectedStatus, setSelectedStatus] = useState( 'ACTIVE' ); // Default selected option
 
     const [topCardFocusedCardIndex, setTopCardFocusedCardIndex] = useState( 0 )
 
@@ -64,6 +74,12 @@ const Home = () => {
         setTopCardFocusedCardIndex( roundIndex )
     }, [] );
 
+
+
+    const handlePostJobs = () => {
+        props.navigation.navigate( "PostJobPage" )
+    }
+
     const TopCard = () => {
         return ( <FlatList
             onScroll={( e ) => onScroll( e )}
@@ -71,31 +87,95 @@ const Home = () => {
             pagingEnabled={true}
             data={JOB_LIST}
             showsHorizontalScrollIndicator={false}
-            renderItem={( props ) => <JobPostingComponentTopCard props={props} />}
+            renderItem={( props ) => {
+
+                return (
+                    <JobPostingComponentTopCard props={props} />
+                )
+            }}
             keyExtractor={item => item}
 
         /> )
     }
-    const BottomCard = () => {
-        return ( <FlatList
-            data={JOB_LIST}
-            renderItem={( props ) => <JobPostingComponent props={props} />}
-            keyExtractor={item => item}
-        /> )
+    const BottomCard = ( props ) => {
+        if ( props?.UPCOMING ) {
+            return (
+                <View>
+                    <FlatList
+                        data={JOB_LIST_DATE_WISE}
+                        keyExtractor={item => item?.date}
+                        renderItem={( { item } ) => {
+                            return (
+                                <View>
+                                    <CustomText title={item.date} fontFamily={FontDirectory.PoppinsRegular} size={12} style={styles.dateTextUnderUpcomingSection} />
+                                    <FlatList
+                                        data={item?.jobs}
+                                        renderItem={( props ) => {
+                                            return (
+                                                <JobStatusComponent props={props} mode={selectedOption} />
+                                            )
+                                        }}
+                                        keyExtractor={item => item}
+                                    />
+                                </View>
+                            )
+                        }}
+                    />
+                </View>
+            )
+        }
+
+
+        return (
+            <FlatList
+                data={JOB_LIST}
+                renderItem={( props ) => {
+                    return (
+                        <JobStatusComponent props={props} mode={selectedOption} />
+                    )
+                }}
+                keyExtractor={item => item}
+            />
+        )
     }
 
 
     const RenderCards = ( { props } ) => {
         if ( props == 1 ) {
-            return (
-                <View>
-                    <CustomText title="Top Job picks for you" style={{ marginLeft: 24 }} fontFamily={FontDirectory.PoppinsRegular} fontSize={12} color={theme.Primary} />
-                    <TopCard />
-                    <View style={styles.topCardScrollIndicatorContainer}>
-                        {JOB_LIST?.map( ( eachDots, index ) => {
-                            return ( <CustomDots selected={index == topCardFocusedCardIndex} key={index} /> )
-                        } )}
+            if ( selectedOption == "JOBS" ) {
+                return (
+
+                    <View>
+                        <CustomText title="Top Job picks for you" style={{ marginLeft: 24 }} fontFamily={FontDirectory.PoppinsRegular} fontSize={12} color={theme.Primary} />
+                        <TopCard />
+                        <View style={styles.topCardScrollIndicatorContainer}>
+                            {JOB_LIST?.map( ( eachDots, index ) => {
+                                return ( <CustomDots selected={index == topCardFocusedCardIndex} key={index} /> )
+                            } )}
+                        </View>
                     </View>
+                )
+            }
+            return (
+                <View style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginBottom: 12
+                }}>
+                    <TouchableOpacity
+                        onPress={() => handlePostJobs()}
+                        style={{
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            paddingVertical: 28
+                        }}>
+                        <FontAwesome name="plus-circle" size={40} color={theme.Primary} />
+                        <CustomText title="POST JOB or duplicate" fontSize={14} style={{ marginTop: 12 }} fontFamily={FontDirectory.PoppinsMedium} />
+                    </TouchableOpacity>
+
+
+                    <SegmentControl3 selectedOption={selectedStatus} setSelectedOption={setSelectedStatus} segment1="ACTIVE" segment2="UPCOMING" segment3="HISTORY" />
+
                 </View>
             )
         }
@@ -105,10 +185,10 @@ const Home = () => {
                 alignSelf: 'center'
             }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 6, marginVertical: 5 }}>
-                    <CustomText title="ALL JOBS" style={{ marginLeft: 4 }} fontFamily={FontDirectory.PoppinsRegular} fontSize={12} color={theme.Primary} />
-                    <MaterialCommunityIcons name='view-dashboard' size={14} color={theme.Primary} />
+                    {selectedStatus != "UPCOMING" && <CustomText title={selectedOption == "JOBS" ? "ALL JOBS" : "WAITING FOR APPROVAL"} style={{ marginLeft: 4 }} fontFamily={FontDirectory.PoppinsRegular} fontSize={12} color={theme.Primary} />}
+                    {selectedOption == "JOBS" && <MaterialCommunityIcons name='view-dashboard' size={14} color={theme.Primary} />}
                 </View>
-                <BottomCard />
+                <BottomCard UPCOMING={selectedStatus == "UPCOMING"} />
             </View>
         )
     }
@@ -146,11 +226,18 @@ const styles = StyleSheet.create( {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: 16
+        paddingVertical: 16,
+        paddingHorizontal: 8,
+        width: windowWidth,
     },
     topCardScrollIndicatorContainer: {
         flexDirection: "row",
         alignSelf: 'center'
+    },
+    dateTextUnderUpcomingSection: {
+        marginLeft: 4,
+        marginBottom: 6,
+        marginTop: 2
     }
 } );
 

@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import FontDirectory from '../assets/FontDirectory';
 
-const SegmentedControl = ( props ) => {
+
+
+
+const windowWidth = Dimensions.get( 'window' ).width;
+const windowHeight = Dimensions.get( 'window' ).height;
+
+const SegmentControl3 = ( props ) => {
 
     return (
         <View style={styles.container}>
             <TouchableOpacity
-                disabled={props?.disabled}
                 style={[
                     styles.option,
                     props?.selectedOption === props?.segment1 && styles.selectedOption
@@ -40,6 +45,24 @@ const SegmentedControl = ( props ) => {
                     {props?.segment2}
                 </Text>
             </TouchableOpacity>
+
+
+            <TouchableOpacity
+                style={[
+                    styles.option,
+                    props?.selectedOption === props?.segment3 && styles.selectedOption
+                ]}
+                onPress={() => props?.setSelectedOption( props?.segment3 )}
+            >
+                <Text
+                    style={[
+                        styles.optionText,
+                        props?.selectedOption === props?.segment3 && styles.selectedText
+                    ]}
+                >
+                    {props?.segment3}
+                </Text>
+            </TouchableOpacity>
         </View>
     );
 };
@@ -51,8 +74,8 @@ const styles = StyleSheet.create( {
         borderWidth: 1,
         backgroundColor: '#412C60',
         overflow: 'hidden',
-        height: 32,
-        width: 120,
+        height: 50,
+        width: windowWidth * 0.9,
         padding: 4
     },
     option: {
@@ -88,4 +111,4 @@ const styles = StyleSheet.create( {
     },
 } );
 
-export default SegmentedControl;
+export default SegmentControl3;

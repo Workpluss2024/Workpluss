@@ -46,6 +46,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import { Searchbar } from 'react-native-paper';
 import SkipForNowComponent from '../../customComponents/SkipForNowComponent';
 import TopProgressBar from '../../customComponents/TopProgressBar';
+import ConfirmationModal from '../../customComponents/ConfirmationModal';
 
 const windowWidth = Dimensions.get( 'window' ).width;
 const windowHeight = Dimensions.get( 'window' ).height;
@@ -125,7 +126,7 @@ const UploadDocuments = () => {
     const theme = useSelector( ( state ) => state.theme?.theme )
 
 
-
+    const [modalVisible, setModalVisible] = React.useState( false );
 
     const [documentUploadStatus, setDocumentUploadStatus] = useState( DOCUMENT_LIST )
 
@@ -138,6 +139,14 @@ const UploadDocuments = () => {
     const [selectedDocument, setSelectedDocument] = useState( null )
 
 
+
+
+
+    const handleUpload = () => {
+        setModalVisible( true )
+    }
+
+
     return (
         <ImageBackground
             style={commonStyles.container}
@@ -147,9 +156,9 @@ const UploadDocuments = () => {
             <SafeAreaView style={{ flex: 1 }}>
                 <View style={commonStyles.headerContainer}>
                     <TouchableOpacity>
-                        <FontAwesome5 name="chevron-left" color={theme.Primary} size={24} style={commonStyles.headerLeftArrow} />
+                        <FontAwesome5 name="chevron-left" color={theme.Primary} size={18} style={commonStyles.headerLeftArrow} />
                     </TouchableOpacity>
-                    <CustomText title="Work Preference" fontFamily={FontDirectory.poppinsBold} color={theme.Primary} fontSize={24} />
+                    <CustomText title="Profile / Documents" fontFamily={FontDirectory.poppinsBold} color={theme.Primary} fontSize={14} />
                 </View>
                 <TopProgressBar totalPageCount={10} completedPage={10} />
                 {/* <ScrollView style={commonStyles.scrollViewContainer}> */}
@@ -299,7 +308,13 @@ const UploadDocuments = () => {
                                         fontSize={12}
                                         fontFamily={FontDirectory.interRegular} />
                                 </View>
-
+                                <CustomButton
+                                    onPress={() => handleUpload()}
+                                    fontSize={18} title="Upload" dflt style={{
+                                        width: windowWidth * 0.88,
+                                        marginTop: 36
+                                    }} />
+                                <View style={{ height: 80 }} />
                             </ScrollView>
                         </View>}
 
@@ -330,7 +345,7 @@ const UploadDocuments = () => {
                                         )
                                     } )}
                                 </View>
-                                <View style={{ height: 24 }} />
+                                <View style={{ height: 80 }} />
                             </ScrollView>
                         </View>}
 
@@ -339,6 +354,14 @@ const UploadDocuments = () => {
                 </View>
                 {/* </ScrollView> */}
 
+
+                <ConfirmationModal
+                    heading="Are you sure ?"
+                    description="You wont be abel to revert this!"
+                    visible={modalVisible}
+                    yesText="Yes"
+                    cancelText="Cancel"
+                    onDismiss={() => setModalVisible( false )} />
 
 
 
@@ -370,7 +393,7 @@ const styles = StyleSheet.create( {
         flex: 1,
         paddingTop: 24,
         width: windowWidth * 0.92,
-        alignItems: 'center'
+        alignItems: 'center',
     },
     documentStatusContainer: {
         flexDirection: 'row',
