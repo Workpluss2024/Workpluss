@@ -46,14 +46,16 @@ const windowWidth = Dimensions.get( 'window' ).width;
 const windowHeight = Dimensions.get( 'window' ).height;
 
 
-const WorkPreference = () => {
+const WorkPreference = ( props ) => {
 
     const theme = useSelector( ( state ) => state.theme?.theme )
 
     const LANGUAGE_LIST = ["Flexible (Daily Jobs)", "Steady (Long term jobs)"]
 
     const [selectedLanguage, setSelectedLanguage] = useState( "Flexible (Daily Jobs)" )
-
+    const handleNext = () => {
+        props.navigation.navigate( "GeneralAgreement" )
+    }
 
     return (
         <ImageBackground
@@ -62,20 +64,19 @@ const WorkPreference = () => {
             imageStyle={{ resizeMode: 'stretch', height: windowHeight, width: windowWidth }}
         >
             <SafeAreaView>
-                <View style={commonStyles.headerContainer}>
+                <View style={[commonStyles.headerContainer, { marginTop: 48 }]}>
                     <TouchableOpacity>
                         <FontAwesome5 name="chevron-left" color={theme.Primary} size={24} style={commonStyles.headerLeftArrow} />
                     </TouchableOpacity>
                     <CustomText title="Work Preference" fontFamily={FontDirectory.poppinsBold} color={theme.Primary} fontSize={24} />
                 </View>
                 <TopProgressBar totalPageCount={10} completedPage={8} />
-                <ScrollView style={commonStyles.scrollViewContainer}>
 
                     <View style={commonStyles.contentContainer}>
-                        <View style={{ flex: 3 }} />
+                        <View style={{ flex: 1 }} />
 
 
-                        <View style={{ flex: 3 }}>
+                        <View style={{ flex: 2 }}>
                             {LANGUAGE_LIST?.map( ( eachLanguage, index ) => {
 
                                 const isSelected = eachLanguage == selectedLanguage
@@ -105,11 +106,10 @@ const WorkPreference = () => {
 
 
                         <View style={{ alignItems: 'center', width: windowWidth, flex: 2 }}>
-                            <CustomButton title="Next" fontSize={16} dflt={true} style={{ marginBottom: 18, width: windowWidth * 0.9 }} />
+                            <CustomButton title="Next" fontSize={16} dflt={true} style={{ marginBottom: 18, width: windowWidth * 0.9 }} onPress={handleNext} />
                             <SkipForNowComponent />
                         </View>
                     </View>
-                </ScrollView>
 
 
 

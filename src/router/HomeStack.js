@@ -9,6 +9,7 @@ import UploadDocuments from '../screens/onBoarding/UploadDocuments';
 import Home from '../screens/Home';
 import PostJobPage from '../screens/PostJobPage';
 import PreviewPosts from '../screens/PreviewPosts';
+import ApproveJobs from '../screens/ApproveJobs';
 
 
 
@@ -21,8 +22,7 @@ export default function HomeStack() {
             initialRouteName='MainHome'
             screenOptions={{
                 headerShown: false,
-                gestureEnabled: true,
-                gestureDirection: 'horizontal',
+                gestureEnabled: false,
                 cardStyleInterpolator: ( { current, next, layouts } ) => ( {
                     cardStyle: {
                         transform: [
@@ -59,6 +59,7 @@ export default function HomeStack() {
             <Stack.Screen name="MainHome" component={Home} />
             <Stack.Screen name="PostJobPage" component={PostJobPage} />
             <Stack.Screen name="PreviewPosts" component={PreviewPosts} />
+            <Stack.Screen name="ApproveJobs" component={ApproveJobs} />
 
 
 

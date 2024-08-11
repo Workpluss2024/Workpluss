@@ -24,6 +24,8 @@ const lightTheme = {
     Warning: "#FCDC0C",
     Info: "#FFFFFF",
 
+    ErrorBlur: "rgba(255,59,99,0.5)",
+
     Transparent: 'transparent'
 }
 

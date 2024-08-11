@@ -12,6 +12,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Octicons from 'react-native-vector-icons/Octicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 
 import OnboardingStack from './OnboardingStack';
 
@@ -81,13 +82,15 @@ export default function HomeBottomTabStack() {
                             onLongPress={onLongPress}
                             style={styles.bottomTabButtons}
                         >
-                            {label == "Home" && <Octicons name="home" size={size} color={isFocused ? theme?.Secondary : theme.PrimaryText} />}
-                            {label == "Dashboard" && <MaterialCommunityIcons name="view-dashboard-outline" size={size} color={isFocused ? theme?.Secondary : theme.PrimaryText} />}
-                            {label == "Schedule" && <AntDesign name="checkcircleo" size={size} color={isFocused ? theme?.Secondary : theme.PrimaryText} />}
+                            {/* {label == "Home" && <Octicons name="home" size={size} color={isFocused ? theme?.Secondary : theme.PrimaryText} />} */}
+                            {label == "Home" && <Image source={isFocused ? ImageDirectory.homeImageFocused : ImageDirectory.homeImage} style={{ height: size, width: size, resizeMode: 'contain' }} />}
+                            {/* {label == "Dashboard" && <MaterialCommunityIcons name="view-dashboard-outline" size={size} color={isFocused ? theme?.Secondary : theme.PrimaryText} />} */}
+                            {label == "Dashboard" && <Image source={isFocused ? ImageDirectory.dashboardImageFocused : ImageDirectory.dashboardImage} style={{ height: size, width: size, resizeMode: 'contain' }} />}
+                            {label == "Schedule" && <Image source={isFocused ? ImageDirectory.scheduleImageFocused : ImageDirectory.scheduleImage} style={{ height: size, width: size, resizeMode: 'contain' }} />}
                             {label == "Profile" && <View style={{ padding: 2, backgroundColor: isFocused ? theme?.Secondary : 'transparent', borderRadius: 50 }}>
                                 <Image source={{ uri: 'https://cdn1.iconfinder.com/data/icons/user-pictures/101/malecostume-512.png' }} style={[styles.tabBarIcon, styles.tabBarIconProfile]} />
                             </View>}
-                            {label != "Profile" && <Text style={{ color: isFocused ? theme?.Secondary : theme.PrimaryText, fontFamily: FontDirectory.poppinsSemiBold, fontSize: 10 }}>
+                            {label != "Profile" && <Text style={{ color: isFocused ? theme?.Secondary : theme.PrimaryText, fontFamily: FontDirectory.PoppinsRegular, letterSpacing: 1, fontSize: 10, marginTop: 2 }}>
                                 {label}
                             </Text>}
                         </TouchableOpacity>

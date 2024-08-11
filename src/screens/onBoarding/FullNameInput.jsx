@@ -48,7 +48,7 @@ const windowWidth = Dimensions.get( 'window' ).width;
 const windowHeight = Dimensions.get( 'window' ).height;
 
 
-const FullNameInput = () => {
+const FullNameInput = ( props ) => {
 
     const theme = useSelector( ( state ) => state.theme?.theme )
 
@@ -57,6 +57,11 @@ const FullNameInput = () => {
     const [selectedLanguage, setSelectedLanguage] = useState( "English" )
 
     const [searchQuery, setSearchQuery] = useState( '' );
+
+
+    const handleNext = () => {
+        props.navigation.navigate( "NameConfirmationPage" )
+    }
 
     return (
         <ImageBackground
@@ -114,7 +119,7 @@ const FullNameInput = () => {
                         <View style={{ flex: 1 }}>
 
 
-                            <CustomButton fontSize={18} title="Next" dflt style={{
+                            <CustomButton fontSize={18} onPress={handleNext} title="Next" dflt style={{
                                 width: windowWidth * 0.88,
                                 marginBottom: 18
                             }} />

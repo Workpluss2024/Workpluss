@@ -12,12 +12,12 @@ export default FontDirectory = {
 
 
 
-    interRegular: 'Poppins-Regular',
-    interMixed: 'Poppins-Medium',
-    interSemiBold: 'Poppins-SemiBold',
+    interRegular: 'Inter-Regular',
+    interMixed: 'Inter-Medium',
+    interSemiBold: 'Inter-SemiBold',
 
 
-    robotoMedium: 'Poppins-Medium',
-    robotoExtraBold: 'Poppins-Bold',
+    robotoMedium: 'Roboto-Medium',
+    robotoExtraBold: 'Roboto-Bold',
 
 }

@@ -60,62 +60,62 @@ const LanguageSelect = ( props ) => {
 
     return (
         <ImageBackground
-            style={commonStyles.container}
+            style={commonStyles.onBoardingOuter}
             source={ImageDirectory.full_background}
             imageStyle={{ resizeMode: 'stretch', height: windowHeight, width: windowWidth }}
         >
-            <SafeAreaView>
-                <ScrollView style={commonStyles.scrollViewContainer}>
+            <SafeAreaView style={commonStyles.onBoardingSafeArea}>
+                {/* <ScrollView style={commonStyles.onBoardingScroll}> */}
 
-                    <View style={commonStyles.contentContainer}>
-                        <CustomText title="Choose your Language" fontFamily={FontDirectory.poppinsBold} fontSize={24} color={theme.Primary} />
+                <View style={commonStyles.contentContainer}>
+                    <CustomText title="Choose your Language" fontFamily={FontDirectory.poppinsBold} fontSize={24} color={theme.Primary} />
 
-                        <View style={{ marginTop: windowHeight * 0.05 }}>
-                            <CustomText title="Language won’t be a barrier for your goals !" fontFamily={FontDirectory.PoppinsRegular} fontSize={15} color={theme.Primary} />
+                    <View style={{ marginTop: windowHeight * 0.05 }}>
+                        <CustomText title="Language won’t be a barrier for your goals !" fontFamily={FontDirectory.PoppinsRegular} fontSize={15} color={theme.Primary} />
 
-                            <Searchbar
-                                placeholder="Search"
-                                iconColor={theme.Accent4}
-                                onChangeText={setSearchQuery}
-                                value={searchQuery}
-                                mode="view"
-                                placeholderTextColor={theme.Accent4}
-                                style={{
-                                    backgroundColor: theme.Primary,
-                                    borderRadius: 10,
-                                    height: 56,
-                                    marginTop: windowHeight * 0.03,
-                                    marginBottom: 24
-                                }}
-                                inputStyle={{
-                                    fontFamily: FontDirectory.PoppinsRegular,
-                                    fontSize: 16,
-                                    marginTop: -6
-                                }}
-                            />
-                            {LANGUAGE_LIST?.map( ( eachLanguage, index ) => {
+                        <Searchbar
+                            placeholder="Search"
+                            iconColor={theme.Accent4}
+                            onChangeText={setSearchQuery}
+                            value={searchQuery}
+                            mode="view"
+                            placeholderTextColor={theme.Accent4}
+                            style={{
+                                backgroundColor: theme.Primary,
+                                borderRadius: 10,
+                                height: 56,
+                                marginTop: windowHeight * 0.03,
+                                marginBottom: 24
+                            }}
+                            inputStyle={{
+                                fontFamily: FontDirectory.PoppinsRegular,
+                                fontSize: 16,
+                                marginTop: -6
+                            }}
+                        />
+                        {LANGUAGE_LIST?.map( ( eachLanguage, index ) => {
 
-                                const isSelected = eachLanguage == selectedLanguage
-                                return (
-                                    <TouchableOpacity
-                                        onPress={() => setSelectedLanguage( eachLanguage )}
-                                        key={index}
-                                        style={[styles?.languageButtonContainer, isSelected && { backgroundColor: theme.SecondaryBackground }, true && { borderColor: theme.SecondaryBackground, borderWidth: 2 }]}>
-                                        <CustomText fontSize={16} title={eachLanguage} color={isSelected ? theme.PrimaryText : theme.PrimaryBackground} fontFamily={FontDirectory.PoppinsMedium} />
-                                        <View style={[styles?.languageCheckContainer, { backgroundColor: isSelected ? theme.PrimaryText : theme.PrimaryBackground }]}>
-                                            <Feather name="check" size={10} color={isSelected ? theme.PrimaryBackground : theme.PrimaryText} />
-                                        </View>
-                                    </TouchableOpacity>
-                                )
-                            } )}
+                            const isSelected = eachLanguage == selectedLanguage
+                            return (
+                                <TouchableOpacity
+                                    onPress={() => setSelectedLanguage( eachLanguage )}
+                                    key={index}
+                                    style={[styles?.languageButtonContainer, isSelected && { backgroundColor: theme.SecondaryBackground }, true && { borderColor: theme.SecondaryBackground, borderWidth: 2 }]}>
+                                    <CustomText fontSize={16} title={eachLanguage} color={isSelected ? theme.PrimaryText : theme.PrimaryBackground} fontFamily={FontDirectory.PoppinsMedium} />
+                                    <View style={[styles?.languageCheckContainer, { backgroundColor: isSelected ? theme.PrimaryText : theme.PrimaryBackground }]}>
+                                        <Feather name="check" size={10} color={isSelected ? theme.PrimaryBackground : theme.PrimaryText} />
+                                    </View>
+                                </TouchableOpacity>
+                            )
+                        } )}
 
 
-                            <CustomButton
-                                onPress={() => handleNext()}
-                                title="Continue" fontSize={16} dflt={true} style={{ marginTop: 18 }} />
-                        </View>
+                        <CustomButton
+                            onPress={() => handleNext()}
+                            title="Continue" fontSize={16} dflt={true} style={{ marginTop: 18 }} />
                     </View>
-                </ScrollView>
+                </View>
+                {/* </ScrollView> */}
 
 
 

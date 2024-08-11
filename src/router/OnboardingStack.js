@@ -28,11 +28,10 @@ const Stack = createStackNavigator();
 export default function OnboardingStack() {
     return (
         <Stack.Navigator
-            initialRouteName='GeneralAgreement'
+            initialRouteName='SplashScreen'
             screenOptions={{
                 headerShown: false,
-                gestureEnabled: true,
-                gestureDirection: 'horizontal',
+                gestureEnabled: false,
                 cardStyleInterpolator: ( { current, next, layouts } ) => ( {
                     cardStyle: {
                         transform: [
@@ -80,8 +79,8 @@ export default function OnboardingStack() {
             <Stack.Screen name="BirthPlaceInput" component={BirthPlaceInput} />
             <Stack.Screen name="DateOfBirthInput" component={DateOfBirthInput} />
             <Stack.Screen name="WorkPreference" component={WorkPreference} />
-            <Stack.Screen name="UploadDocuments" component={UploadDocuments} />
             <Stack.Screen name="GeneralAgreement" component={GeneralAgreement} />
+            <Stack.Screen name="UploadDocuments" component={UploadDocuments} />
 
         </Stack.Navigator>
     );

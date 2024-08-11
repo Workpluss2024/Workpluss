@@ -66,31 +66,29 @@ const ThirdPartyLoginOptions = ( props ) => {
             source={ImageDirectory.full_background}
             imageStyle={{ resizeMode: 'stretch', height: windowHeight, width: windowWidth }}
         >
-            <SafeAreaView>
-                <ScrollView style={commonStyles.scrollViewContainer}>
+            <SafeAreaView style={commonStyles.onBoardingSafeArea}>
 
-                    <View style={commonStyles.contentContainer}>
-                        <View style={styles.loginOptionsContainer}>
+                <View style={commonStyles.contentContainer}>
+                    <View style={styles.loginOptionsContainer}>
 
-                            <TouchableOpacity style={styles.loginButton}>
-                                <Image source={ImageDirectory.login_facebook} style={styles.loginIcons} />
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.loginButton}>
-                                <Image source={ImageDirectory.login_google} style={styles.loginIcons} />
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.loginButton}>
-                                <Image source={ImageDirectory.login_apple} style={styles.loginIcons} />
-                            </TouchableOpacity>
-                        </View>
-
-
-
-
-
-
-                        <SkipForNowComponent onSkip={() => handleNext()} absolute />
+                        <TouchableOpacity style={styles.loginButton} onPress={() => handleNext()}>
+                            <Image source={ImageDirectory.login_facebook} style={styles.loginIcons} />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.loginButton} onPress={() => handleNext()}>
+                            <Image source={ImageDirectory.login_google} style={styles.loginIcons} />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.loginButton} onPress={() => handleNext()}>
+                            <Image source={ImageDirectory.login_apple} style={styles.loginIcons} />
+                        </TouchableOpacity>
                     </View>
-                </ScrollView>
+
+
+
+
+
+
+                </View>
+                <SkipForNowComponent onSkip={() => handleNext()} absolute />
 
 
 

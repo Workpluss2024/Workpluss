@@ -15,8 +15,7 @@ export default function MainRouter() {
                 initialRouteName='HomeBottomTabStack'
                 screenOptions={{
                     headerShown: false,
-                    gestureEnabled: true,
-                    gestureDirection: 'horizontal',
+                    gestureEnabled: false,
                     cardStyleInterpolator: ( { current, next, layouts } ) => ( {
                         cardStyle: {
                             transform: [

@@ -54,6 +54,8 @@ const JOB_LIST_DATE_WISE = [
 ]
 
 const Home = ( props ) => {
+
+
     const theme = useSelector( ( state ) => state.theme?.theme )
 
     const [selectedOption, setSelectedOption] = useState( 'JOBS' ); // Default selected option
@@ -61,7 +63,9 @@ const Home = ( props ) => {
 
     const [topCardFocusedCardIndex, setTopCardFocusedCardIndex] = useState( 0 )
 
-
+    const handleNavigateToApproveJobs = () => {
+        props?.navigation?.navigate( "ApproveJobs" )
+    }
 
     const dashboardCardSection = [1, 2]
 
@@ -112,7 +116,7 @@ const Home = ( props ) => {
                                         data={item?.jobs}
                                         renderItem={( props ) => {
                                             return (
-                                                <JobStatusComponent props={props} mode={selectedOption} />
+                                                <JobStatusComponent props={props} mode={selectedOption} handleApprove={handleNavigateToApproveJobs} />
                                             )
                                         }}
                                         keyExtractor={item => item}
@@ -131,7 +135,7 @@ const Home = ( props ) => {
                 data={JOB_LIST}
                 renderItem={( props ) => {
                     return (
-                        <JobStatusComponent props={props} mode={selectedOption} />
+                        <JobStatusComponent props={props} mode={selectedOption} handleApprove={handleNavigateToApproveJobs} />
                     )
                 }}
                 keyExtractor={item => item}

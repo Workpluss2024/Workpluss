@@ -48,7 +48,7 @@ const windowWidth = Dimensions.get( 'window' ).width;
 const windowHeight = Dimensions.get( 'window' ).height;
 
 
-const RegistrationAddress = () => {
+const RegistrationAddress = ( props ) => {
 
     const theme = useSelector( ( state ) => state.theme?.theme )
 
@@ -57,6 +57,12 @@ const RegistrationAddress = () => {
     const [selectedLanguage, setSelectedLanguage] = useState( "English" )
 
     const [searchQuery, setSearchQuery] = useState( '' );
+
+    const handleNext = () => {
+        props.navigation.navigate( "GenderSelect" )
+    }
+
+
 
     return (
         <ImageBackground
@@ -155,10 +161,12 @@ const RegistrationAddress = () => {
                                 </View>
                             </View>
 
-                            <CustomButton fontSize={18} title="Next" dflt style={{
-                                width: windowWidth * 0.88,
-                                marginTop: 24
-                            }} />
+                            <CustomButton fontSize={18} title="Next" dflt
+                                onPress={handleNext}
+                                style={{
+                                    width: windowWidth * 0.88,
+                                    marginTop: 24
+                                }} />
                         </View>
 
 

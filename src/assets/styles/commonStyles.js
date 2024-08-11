@@ -72,6 +72,29 @@ const commonStyles = StyleSheet.create( {
     inputHeader: {
         marginTop: 18
     },
+
+
+
+
+
+
+
+
+
+    onBoardingSafeArea: {
+        flex: 1,
+        justifyContent: 'center',
+        // alignItems: 'center',
+        // backgroundColor: 'pink'
+    },
+    onBoardingScroll: {
+        backgroundColor: 'pink',
+    },
+    onBoardingOuter: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
 } );
 
 export default commonStyles;

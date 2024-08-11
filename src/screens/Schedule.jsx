@@ -5,7 +5,7 @@
  * @format
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
     StyleSheet,
@@ -32,6 +32,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import ScheduleTiles from '../customComponents/ScheduleTiles';
 import FontDirectory from '../assets/FontDirectory.js';
+import SegmentControl3 from '../customComponents/SegmentControl3.jsx';
 
 const windowWidth = Dimensions.get( 'window' ).width;
 const windowHeight = Dimensions.get( 'window' ).height;
@@ -41,45 +42,54 @@ const Schedule = () => {
     const theme = useSelector( ( state ) => state.theme?.theme )
 
 
+    const [selectedStatus, setSelectedStatus] = useState( 'APPLIED' ); // Default selected option
+
+
+
     const activities = [
         {
             id: 1,
             year: 2024,
             month: "JUNE",
             activityList: [
-                { date: '18', time: '08:00 am - 03:00 pm', description: 'Restaurant helper', location: 'MIDC, Pune, 89456', status: 'Completed', companyLogo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQymVrLS-bohhndriu8wQKb3g0z810HJ34sPA&s" },
-                { date: '22', time: '08:00 am - 03:00 pm', description: 'Restaurant helper', location: 'MIDC, Pune, 89456', status: 'Completed', companyLogo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQymVrLS-bohhndriu8wQKb3g0z810HJ34sPA&s" },
-                { date: '30', time: '08:00 am - 03:00 pm', description: 'Restaurant helper', location: 'MIDC, Pune, 89456', status: 'Completed', companyLogo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQymVrLS-bohhndriu8wQKb3g0z810HJ34sPA&s" },
-                { date: '06', time: '09:00 pm - 11:00 pm', description: 'Restaurant helper', location: 'MIDC, Pune, 89456', status: 'Applied', companyLogo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQymVrLS-bohhndriu8wQKb3g0z810HJ34sPA&s" },
-                { date: '10', time: '08:00 am - 03:00 pm', description: 'Restaurant helper', location: 'MIDC, Pune, 89456', status: 'Approved', companyLogo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQymVrLS-bohhndriu8wQKb3g0z810HJ34sPA&s" },
-            ]
-        },
-        {
-            id: 2,
-            year: 2024,
-            month: "JUL",
-            activityList: [
-                { date: '18', time: '08:00 am - 03:00 pm', description: 'Restaurant helper', location: 'MIDC, Pune, 89456', status: 'Completed', companyLogo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQymVrLS-bohhndriu8wQKb3g0z810HJ34sPA&s" },
-                { date: '22', time: '08:00 am - 03:00 pm', description: 'Restaurant helper', location: 'MIDC, Pune, 89456', status: 'Completed', companyLogo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQymVrLS-bohhndriu8wQKb3g0z810HJ34sPA&s" },
-                { date: '30', time: '08:00 am - 03:00 pm', description: 'Restaurant helper', location: 'MIDC, Pune, 89456', status: 'Completed', companyLogo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQymVrLS-bohhndriu8wQKb3g0z810HJ34sPA&s" },
-                { date: '06', time: '09:00 pm - 11:00 pm', description: 'Restaurant helper', location: 'MIDC, Pune, 89456', status: 'Applied', companyLogo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQymVrLS-bohhndriu8wQKb3g0z810HJ34sPA&s" },
-                { date: '10', time: '08:00 am - 03:00 pm', description: 'Restaurant helper', location: 'MIDC, Pune, 89456', status: 'Approved', companyLogo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQymVrLS-bohhndriu8wQKb3g0z810HJ34sPA&s" },
-            ]
-        },
-        {
-            id: 3,
-            year: 2024,
-            month: "Aug",
-            activityList: [
-                { date: '18', time: '08:00 am - 03:00 pm', description: 'Restaurant helper', location: 'MIDC, Pune, 89456', status: 'Completed', companyLogo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQymVrLS-bohhndriu8wQKb3g0z810HJ34sPA&s" },
-                { date: '22', time: '08:00 am - 03:00 pm', description: 'Restaurant helper', location: 'MIDC, Pune, 89456', status: 'Completed', companyLogo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQymVrLS-bohhndriu8wQKb3g0z810HJ34sPA&s" },
-                { date: '30', time: '08:00 am - 03:00 pm', description: 'Restaurant helper', location: 'MIDC, Pune, 89456', status: 'Completed', companyLogo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQymVrLS-bohhndriu8wQKb3g0z810HJ34sPA&s" },
-                { date: '06', time: '09:00 pm - 11:00 pm', description: 'Restaurant helper', location: 'MIDC, Pune, 89456', status: 'Applied', companyLogo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQymVrLS-bohhndriu8wQKb3g0z810HJ34sPA&s" },
-                { date: '10', time: '08:00 am - 03:00 pm', description: 'Restaurant helper', location: 'MIDC, Pune, 89456', status: 'Approved', companyLogo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQymVrLS-bohhndriu8wQKb3g0z810HJ34sPA&s" },
+                {
+                    id: 1,
+                    date: "18",
+                    data: [
+                        { id: 1, date: '18', time: '08:00 am - 03:00 pm', description: 'Restaurant helper', location: 'MIDC, Pune, 89456', status: 'Completed', companyLogo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQymVrLS-bohhndriu8wQKb3g0z810HJ34sPA&s" },
+                        { id: 2, date: '18', time: '08:00 am - 03:00 pm', description: 'Restaurant helper', location: 'MIDC, Pune, 89456', status: 'Completed', companyLogo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQymVrLS-bohhndriu8wQKb3g0z810HJ34sPA&s" },
+                        { id: 3, date: '18', time: '08:00 am - 03:00 pm', description: 'Restaurant helper', location: 'MIDC, Pune, 89456', status: 'Completed', companyLogo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQymVrLS-bohhndriu8wQKb3g0z810HJ34sPA&s" },
+                        { id: 4, date: '18', time: '09:00 pm - 11:00 pm', description: 'Restaurant helper', location: 'MIDC, Pune, 89456', status: 'Applied', companyLogo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQymVrLS-bohhndriu8wQKb3g0z810HJ34sPA&s" },
+                        { id: 5, date: '18', time: '08:00 am - 03:00 pm', description: 'Restaurant helper', location: 'MIDC, Pune, 89456', status: 'Approved', companyLogo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQymVrLS-bohhndriu8wQKb3g0z810HJ34sPA&s" }
+                    ]
+                },
+                {
+                    id: 2,
+                    date: "23",
+                    data: [
+                        { id: 1, date: '23', time: '08:00 am - 03:00 pm', description: 'Restaurant helper', location: 'MIDC, Pune, 89456', status: 'Completed', companyLogo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQymVrLS-bohhndriu8wQKb3g0z810HJ34sPA&s" },
+                        { id: 2, date: '23', time: '08:00 am - 03:00 pm', description: 'Restaurant helper', location: 'MIDC, Pune, 89456', status: 'Completed', companyLogo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQymVrLS-bohhndriu8wQKb3g0z810HJ34sPA&s" },
+                        { id: 3, date: '23', time: '08:00 am - 03:00 pm', description: 'Restaurant helper', location: 'MIDC, Pune, 89456', status: 'Completed', companyLogo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQymVrLS-bohhndriu8wQKb3g0z810HJ34sPA&s" },
+                        { id: 4, date: '23', time: '09:00 pm - 11:00 pm', description: 'Restaurant helper', location: 'MIDC, Pune, 89456', status: 'Applied', companyLogo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQymVrLS-bohhndriu8wQKb3g0z810HJ34sPA&s" },
+                        { id: 5, date: '23', time: '08:00 am - 03:00 pm', description: 'Restaurant helper', location: 'MIDC, Pune, 89456', status: 'Approved', companyLogo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQymVrLS-bohhndriu8wQKb3g0z810HJ34sPA&s" }
+                    ]
+                },
             ]
         }
     ];
 
+
+    const RenderDate = ( props ) => {
+        return (
+            <View style={styles.item}>
+                <FlatList
+                    data={props?.item?.data}
+                    renderItem={( { item, index } ) => <ScheduleTiles eachActivity={item} month={props?.month} index={index} />}
+                    keyExtractor={item => item.id}
+                />
+            </View>
+        )
+    };
 
 
 
@@ -90,7 +100,7 @@ const Schedule = () => {
                 <CustomText title={item.month} style={styles.monthName} fontFamily={FontDirectory.poppinsBold} fontSize={12} />
                 <FlatList
                     data={item?.activityList}
-                    renderItem={( { item } ) => <ScheduleTiles eachActivity={item} month={month} />}
+                    renderItem={( { item } ) => <RenderDate item={item} month={month} />}
                     keyExtractor={item => item.id}
                 />
             </View>
@@ -111,16 +121,14 @@ const Schedule = () => {
 
                 <View style={styles.header}>
                     <CustomText title="ACTIVITY" fontFamily={FontDirectory.PoppinsMedium} fontSize={14} />
-                    <View style={{ flexDirection: 'row' }}>
-                        <TouchableOpacity>
-                            <Feather name="filter" size={17} color={theme.Primary} />
-                        </TouchableOpacity>
-
-                        <TouchableOpacity style={{ marginLeft: 12 }}>
-                            <AntDesign name="calendar" size={17} color={theme.Primary} />
-                        </TouchableOpacity>
-                    </View>
+                    <TouchableOpacity style={{ marginLeft: 12 }}>
+                        <AntDesign name="calendar" size={17} color={theme.Primary} />
+                    </TouchableOpacity>
                 </View>
+
+
+                <SegmentControl3 selectedOption={selectedStatus} setSelectedOption={setSelectedStatus} segment1="APPLIED" segment2="APPROVED" segment3="COMPLETED" style={{ marginBottom: 25 }} />
+
 
 
 
@@ -129,6 +137,9 @@ const Schedule = () => {
                     renderItem={( { item } ) => <RenderMonth item={item} />}
                     keyExtractor={item => item.id}
                 />
+
+
+                <View style={{ height: 80 }} />
 
             </SafeAreaView>
         </ImageBackground>
@@ -145,7 +156,7 @@ const styles = StyleSheet.create( {
     container: {
         flex: 1,
         width: windowWidth,
-        paddingHorizontal: 20
+        paddingHorizontal: 12
     },
     header: {
         flexDirection: 'row',

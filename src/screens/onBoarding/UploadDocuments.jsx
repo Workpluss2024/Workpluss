@@ -121,7 +121,7 @@ const DOCUMENT_LIST = [
 ]
 
 
-const UploadDocuments = () => {
+const UploadDocuments = ( props ) => {
 
     const theme = useSelector( ( state ) => state.theme?.theme )
 
@@ -310,7 +310,7 @@ const UploadDocuments = () => {
                                 </View>
                                 <CustomButton
                                     onPress={() => handleUpload()}
-                                    fontSize={18} title="Upload" dflt style={{
+                                    fontSize={18} title="Proceed" dflt style={{
                                         width: windowWidth * 0.88,
                                         marginTop: 36
                                     }} />
@@ -361,7 +361,11 @@ const UploadDocuments = () => {
                     visible={modalVisible}
                     yesText="Yes"
                     cancelText="Cancel"
-                    onDismiss={() => setModalVisible( false )} />
+                    onDismiss={() => {
+                        setModalVisible( false )
+                        props?.navigation?.navigate( "HomeBottomTabStack" )
+
+                    }} />
 
 
 

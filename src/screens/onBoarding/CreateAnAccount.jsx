@@ -62,31 +62,31 @@ const CreateAnAccount = ( props ) => {
 
     return (
         <ImageBackground
-            style={commonStyles.container}
+            style={commonStyles.onBoardingOuter}
             source={ImageDirectory.full_background}
             imageStyle={{ resizeMode: 'stretch', height: windowHeight, width: windowWidth }}
         >
-            <SafeAreaView>
-                <ScrollView style={commonStyles.scrollViewContainer}>
+            <SafeAreaView style={commonStyles.onBoardingSafeArea}>
+                {/* <ScrollView style={commonStyles.scrollViewContainer}> */}
 
-                    <View style={commonStyles.contentContainer}>
-                        <CustomText title="Create an Account" fontFamily={FontDirectory.poppinsBold} fontSize={24} color={theme.Primary} />
-                        <TouchableOpacity
-                            onPress={() => handleNext()}
-                            style={{
-                                height: 44,
-                                width: 44,
-                                borderRadius: 50,
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                marginTop: 18
-                            }}>
-                            <Image source={ImageDirectory.right_arrow_in_circle} style={{ height: 42, width: 42, resizeMode: 'contain' }} />
+                <View style={commonStyles.contentContainer}>
+                    <CustomText title="Create an Account" fontFamily={FontDirectory.poppinsBold} fontSize={24} color={theme.Primary} />
+                    <TouchableOpacity
+                        onPress={() => handleNext()}
+                        style={{
+                            height: 44,
+                            width: 44,
+                            borderRadius: 50,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            marginTop: 18
+                        }}>
+                        <Image source={ImageDirectory.right_arrow_in_circle} style={{ height: 42, width: 42, resizeMode: 'contain' }} />
 
-                        </TouchableOpacity>
-                        <SkipForNowComponent absolute onSkip={() => handleNext()} />
-                    </View>
-                </ScrollView>
+                    </TouchableOpacity>
+                </View>
+                <SkipForNowComponent absolute onSkip={() => handleNext()} />
+                {/* </ScrollView> */}
 
 
 

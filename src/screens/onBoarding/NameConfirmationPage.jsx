@@ -46,14 +46,16 @@ const windowWidth = Dimensions.get( 'window' ).width;
 const windowHeight = Dimensions.get( 'window' ).height;
 
 
-const NameConfirmationPage = () => {
+const NameConfirmationPage = ( props ) => {
 
     const theme = useSelector( ( state ) => state.theme?.theme )
 
     const LANGUAGE_LIST = ["Yes", "No"]
 
     const [selectedLanguage, setSelectedLanguage] = useState( "Yes" )
-
+    const handleNext = () => {
+        props.navigation.navigate( "BirthPlaceInput" )
+    }
 
     return (
         <ImageBackground
@@ -62,55 +64,53 @@ const NameConfirmationPage = () => {
             imageStyle={{ resizeMode: 'stretch', height: windowHeight, width: windowWidth }}
         >
             <SafeAreaView>
-                <View style={commonStyles.headerContainer}>
+                <View style={[commonStyles.headerContainer, { marginTop: 48 }]}>
                     <TouchableOpacity>
                         <FontAwesome5 name="chevron-left" color={theme.Primary} size={24} style={commonStyles.headerLeftArrow} />
                     </TouchableOpacity>
                     <CustomText title="Name confrimation" fontFamily={FontDirectory.poppinsBold} color={theme.Primary} fontSize={24} />
                 </View>
                 <TopProgressBar totalPageCount={10} completedPage={5} />
-                <ScrollView style={commonStyles.scrollViewContainer}>
 
-                    <View style={commonStyles.contentContainer}>
-                        <View style={{ flex: 3 }} />
+                <View style={commonStyles.contentContainer}>
+                    <View style={{ flex: 1 }} />
 
-                        <CustomText fontSize={14} title="Name matches your Aadhar card ?" color={theme.Primary} fontFamily={FontDirectory.PoppinsMedium}
-                            style={{ alignSelf: 'flex-start', marginLeft: windowWidth * 0.06, marginBottom: 12 }} />
-                        <View style={{ flex: 3 }}>
-                            {LANGUAGE_LIST?.map( ( eachLanguage, index ) => {
+                    <CustomText fontSize={14} title="Name matches your Aadhar card ?" color={theme.Primary} fontFamily={FontDirectory.PoppinsMedium}
+                        style={{ alignSelf: 'flex-start', marginLeft: windowWidth * 0.06, marginBottom: 12 }} />
+                    <View style={{ flex: 2 }}>
+                        {LANGUAGE_LIST?.map( ( eachLanguage, index ) => {
 
-                                const isSelected = eachLanguage == selectedLanguage
-                                return (
-                                    <TouchableOpacity
+                            const isSelected = eachLanguage == selectedLanguage
+                            return (
+                                <TouchableOpacity
+                                    onPress={() => setSelectedLanguage( eachLanguage )}
+                                    key={index}
+                                    style={[styles?.languageButtonContainer, isSelected && { backgroundColor: theme.SecondaryBackground }, true && { borderColor: theme.SecondaryBackground, borderWidth: 2 }]}>
+                                    <RadioButton
+                                        value="first"
+                                        color={theme.Primary}
+                                        status={isSelected ? 'checked' : 'unchecked'}
                                         onPress={() => setSelectedLanguage( eachLanguage )}
-                                        key={index}
-                                        style={[styles?.languageButtonContainer, isSelected && { backgroundColor: theme.SecondaryBackground }, true && { borderColor: theme.SecondaryBackground, borderWidth: 2 }]}>
-                                        <RadioButton
-                                            value="first"
-                                            color={theme.Primary}
-                                            status={isSelected ? 'checked' : 'unchecked'}
-                                            onPress={() => setSelectedLanguage( eachLanguage )}
-                                        />
-                                        <CustomText fontSize={16} style={{ marginLeft: 12 }} title={eachLanguage} color={isSelected ? theme.PrimaryText : theme.PrimaryBackground} fontFamily={FontDirectory.PoppinsMedium} />
-                                        {/* <View style={[styles?.languageCheckContainer, { backgroundColor: isSelected ? theme.PrimaryText : theme.PrimaryBackground }]}>
+                                    />
+                                    <CustomText fontSize={16} style={{ marginLeft: 12 }} title={eachLanguage} color={isSelected ? theme.PrimaryText : theme.PrimaryBackground} fontFamily={FontDirectory.PoppinsMedium} />
+                                    {/* <View style={[styles?.languageCheckContainer, { backgroundColor: isSelected ? theme.PrimaryText : theme.PrimaryBackground }]}>
                                             <Feather name="check" size={10} color={isSelected ? theme.PrimaryBackground : theme.PrimaryText} />
                                         </View> */}
-                                    </TouchableOpacity>
-                                )
-                            } )}
+                                </TouchableOpacity>
+                            )
+                        } )}
 
 
-                        </View>
-
-
-
-
-                        <View style={{ alignItems: 'center', width: windowWidth, flex: 2 }}>
-                            <CustomButton title="Next" fontSize={16} dflt={true} style={{ marginBottom: 18, width: windowWidth * 0.9 }} />
-                            <SkipForNowComponent />
-                        </View>
                     </View>
-                </ScrollView>
+
+
+
+
+                    <View style={{ alignItems: 'center', width: windowWidth, flex: 2 }}>
+                        <CustomButton title="Next" fontSize={16} dflt={true} style={{ marginBottom: 18, width: windowWidth * 0.9 }} onPress={handleNext} />
+                        <SkipForNowComponent />
+                    </View>
+                </View>
 
 
 

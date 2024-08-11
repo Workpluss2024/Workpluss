@@ -49,7 +49,7 @@ const windowWidth = Dimensions.get( 'window' ).width;
 const windowHeight = Dimensions.get( 'window' ).height;
 
 
-const DateOfBirthInput = () => {
+const DateOfBirthInput = ( props ) => {
 
     const theme = useSelector( ( state ) => state.theme?.theme )
 
@@ -57,6 +57,11 @@ const DateOfBirthInput = () => {
 
     const [dateOfBirth, setDateOfBirth] = useState( new Date() );
     const [open, setOpen] = useState( false )
+
+
+    const handleNext = () => {
+        props.navigation.navigate( "WorkPreference" )
+    }
 
     return (
         <ImageBackground
@@ -113,7 +118,7 @@ const DateOfBirthInput = () => {
                         <View style={{ flex: 1 }}>
 
 
-                            <CustomButton fontSize={18} title="Next" dflt style={{
+                            <CustomButton onPress={handleNext} fontSize={18} title="Next" dflt style={{
                                 width: windowWidth * 0.88,
                                 marginBottom: 18
                             }} />

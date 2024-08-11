@@ -48,7 +48,7 @@ const windowWidth = Dimensions.get( 'window' ).width;
 const windowHeight = Dimensions.get( 'window' ).height;
 
 
-const GeneralAgreement = () => {
+const GeneralAgreement = ( props ) => {
 
     const theme = useSelector( ( state ) => state.theme?.theme )
 
@@ -56,7 +56,9 @@ const GeneralAgreement = () => {
 
     const [currentStep, setCurrentStep] = useState( 1 )
 
-
+    const handleNext = () => {
+        props.navigation.navigate( "UploadDocuments" )
+    }
 
 
     return (
@@ -91,7 +93,7 @@ const GeneralAgreement = () => {
                             {LANGUAGE_LIST?.map( ( eachLanguage, index ) => {
                                 return (
                                     <TouchableOpacity
-                                        onPress={() => { }}
+                                        onPress={() => { handleNext() }}
                                         key={index}
                                         disabled={currentStep != index}
                                         style={[styles?.languageButtonContainer, {

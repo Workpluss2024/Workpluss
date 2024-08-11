@@ -48,7 +48,7 @@ const windowWidth = Dimensions.get( 'window' ).width;
 const windowHeight = Dimensions.get( 'window' ).height;
 
 
-const BirthPlaceInput = () => {
+const BirthPlaceInput = ( props ) => {
 
     const theme = useSelector( ( state ) => state.theme?.theme )
 
@@ -58,6 +58,10 @@ const BirthPlaceInput = () => {
 
     const [searchQuery, setSearchQuery] = useState( '' );
 
+
+    const handleNext = () => {
+        props.navigation.navigate( "DateOfBirthInput" )
+    }
     return (
         <ImageBackground
             style={commonStyles.container}
@@ -117,7 +121,7 @@ const BirthPlaceInput = () => {
                         <View style={{ flex: 1 }}>
 
 
-                            <CustomButton fontSize={18} title="Next" dflt style={{
+                            <CustomButton fontSize={18} onPress={handleNext} title="Next" dflt style={{
                                 width: windowWidth * 0.88,
                                 marginBottom: 18
                             }} />

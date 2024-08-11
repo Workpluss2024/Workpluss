@@ -11,7 +11,7 @@ const windowHeight = Dimensions.get( 'window' ).height;
 const SegmentControl3 = ( props ) => {
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, props.style]}>
             <TouchableOpacity
                 style={[
                     styles.option,
