@@ -34,7 +34,7 @@ import JobPostingComponent from '../customComponents/JobPostingComponent';
 import JobPostingComponentTopCard from '../customComponents/JobPostingComponentTopCard';
 import FontDirectory from '../assets/FontDirectory';
 import CustomDots from '../customComponents/CustomDots';
-
+import AntDesign from 'react-native-vector-icons/AntDesign'
 import DatePicker from 'react-native-date-picker'
 
 
@@ -68,13 +68,20 @@ const PostJobPage = ( props ) => {
 
     const [work, setWork] = useState( '' )
     const [location, setLocation] = useState( '' )
+    const [address, setAddress] = useState( '' )
+    const [gender, setGender] = useState( '' )
     const [perHourCost, setPerHourCost] = useState( null )
     const [noOfPeople, setNoOfPeople] = useState( null )
-    const [restaurantsWork, setRestaurantsWork] = useState( '' )
+    const [jobType, setJobType] = useState( '' )
+    const [skills, setSkills] = useState( '' )
+    const [about, setAbout] = useState( '' )
+    const [requirements, setRequirements] = useState( '' )
     const [numberOfApplication, setNumberOfApplication] = useState( 10 )
 
-    const [jobDateTime, setJobDateTime] = useState( new Date() );
-    const [open, setOpen] = useState( false )
+
+
+    const [jobDateTime, setJobDateTime] = useState( [new Date()] );
+    const [open, setOpen] = useState( -1 )
 
 
     const [modalVisible, setModalVisible] = React.useState( false );
@@ -145,7 +152,7 @@ const PostJobPage = ( props ) => {
                                 placeholderTextColor={theme.Primary}
                                 fontFamily={FontDirectory.interRegular}
                                 size={14}
-                                style={commonStyles.input}
+                                style={[commonStyles.input, { color: theme.PrimaryText }]}
                                 value={work}
                                 onChangeText={( text ) => { setWork( text ) }}
                             />
@@ -160,9 +167,25 @@ const PostJobPage = ( props ) => {
                                 placeholderTextColor={theme.Primary}
                                 fontFamily={FontDirectory.interRegular}
                                 size={14}
-                                style={commonStyles.input}
+                                style={[commonStyles.input, { color: theme.PrimaryText }]}
                                 value={location}
                                 onChangeText={( text ) => { setLocation( text ) }}
+                            />
+                        </View>
+
+
+
+                        <CustomText title={"Address"} fontFamily={FontDirectory.robotoMedium} fontSize={14} color={theme.Text1} style={commonStyles.inputHeader} />
+                        <View style={[commonStyles.inputOuterContainer, { backgroundColor: theme.MenuNavigatorBottom }]}>
+                            <TextInput
+                                placeholder="Berlin"
+                                keyboardType="text"
+                                placeholderTextColor={theme.Primary}
+                                fontFamily={FontDirectory.interRegular}
+                                size={14}
+                                style={[commonStyles.input, { color: theme.PrimaryText }]}
+                                value={address}
+                                onChangeText={( text ) => { setAddress( text ) }}
                             />
                         </View>
 
@@ -176,9 +199,25 @@ const PostJobPage = ( props ) => {
                                 placeholderTextColor={theme.Primary}
                                 fontFamily={FontDirectory.interRegular}
                                 size={14}
-                                style={commonStyles.input}
+                                style={[commonStyles.input, { color: theme.PrimaryText }]}
                                 value={perHourCost}
                                 onChangeText={( text ) => { setPerHourCost( text ) }}
+                            />
+                        </View>
+
+
+
+                        <CustomText title={"Gender"} fontFamily={FontDirectory.robotoMedium} fontSize={14} color={theme.Text1} style={commonStyles.inputHeader} />
+                        <View style={[commonStyles.inputOuterContainer, { backgroundColor: theme.MenuNavigatorBottom }]}>
+                            <TextInput
+                                placeholder="Female"
+                                keyboardType="text"
+                                placeholderTextColor={theme.Primary}
+                                fontFamily={FontDirectory.interRegular}
+                                size={14}
+                                style={[commonStyles.input, { color: theme.PrimaryText }]}
+                                value={gender}
+                                onChangeText={( text ) => { setGender( text ) }}
                             />
                         </View>
 
@@ -192,7 +231,7 @@ const PostJobPage = ( props ) => {
                                 placeholderTextColor={theme.Primary}
                                 fontFamily={FontDirectory.interRegular}
                                 size={14}
-                                style={commonStyles.input}
+                                style={[commonStyles.input, { color: theme.PrimaryText }]}
                                 value={noOfPeople}
                                 onChangeText={( text ) => { setNoOfPeople( text ) }}
                             />
@@ -207,41 +246,127 @@ const PostJobPage = ( props ) => {
                                 placeholderTextColor={theme.Primary}
                                 fontFamily={FontDirectory.interRegular}
                                 size={14}
-                                style={commonStyles.input}
+                                style={[commonStyles.input, { color: theme.PrimaryText }]}
                                 value={noOfPeople}
                                 onChangeText={( text ) => { setNoOfPeople( text ) }}
                             />
                         </View>
                         <CustomText title={"Select date and time"} fontFamily={FontDirectory.robotoMedium} fontSize={14} color={theme.Text1} style={commonStyles.inputHeader} />
-                        <View style={[commonStyles.inputOuterContainer, { backgroundColor: theme.MenuNavigatorBottom }]}>
-                            <TouchableOpacity
-                                onPress={() => setOpen( true )}
-                                style={[styles.inputOuterContainer, { backgroundColor: theme.SecondaryBackground }]}>
-                                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                    <FontAwesome name="calendar" size={14} color={theme.Primary} />
-                                    <CustomText title={moment( jobDateTime ).format( "  ddd  DD/MM  " )} color={theme.Primary} fontFamily={FontDirectory.interRegular} fontSize={14} />
-                                    <Feather name="clock" size={14} color={theme.Primary} />
-                                    <CustomText title={moment( jobDateTime ).format( "  hh:mm a  " )} color={theme.Primary} fontFamily={FontDirectory.interRegular} fontSize={14} />
+                        {jobDateTime?.map( ( eachDateTime, index ) => {
+                            return (
+                                <View View key={index} style={[commonStyles.inputOuterContainer, { backgroundColor: theme.MenuNavigatorBottom }]}>
+                                    <TouchableOpacity
+                                        onPress={() => setOpen( index )}
+                                        style={[styles.inputOuterContainer, { paddingLeft: 8 }]}>
+                                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                            <FontAwesome name="calendar" size={14} color={theme.Primary} />
+                                            <CustomText title={moment( eachDateTime ).format( "  ddd  DD/MM  " )} color={theme.Primary} fontFamily={FontDirectory.interRegular} fontSize={14} />
+                                            <Feather name="clock" size={14} color={theme.Primary} />
+                                            <CustomText title={moment( eachDateTime ).format( "  hh:mm a  " )} color={theme.Primary} fontFamily={FontDirectory.interRegular} fontSize={14} />
+                                        </View>
+                                    </TouchableOpacity>
+
                                 </View>
-                            </TouchableOpacity>
+                            )
+                        } )}
+                        <TouchableOpacity
+                            onPress={() => {
+                                let tempJobDateTimeList = [...jobDateTime]
+                                let length = tempJobDateTimeList.length
+                                tempJobDateTimeList.push( new Date() )
+                                setJobDateTime( tempJobDateTimeList )
+                                setOpen( length )
+                            }}
+                            style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 18 }}>
+                            <AntDesign name="plus" color={theme.PrimaryText} style={{ marginRight: 16 }} />
+                            <CustomText title={"Select date and time"} color={theme.Text1} fontFamily={FontDirectory.robotoMedium} fontSize={12} />
+                        </TouchableOpacity>
+
+
+
+
+
+                        <CustomText title={"Skills"} fontFamily={FontDirectory.robotoMedium} fontSize={14} color={theme.Text1} style={commonStyles.inputHeader} />
+                        <View style={[commonStyles.longInputOuterContainer, { backgroundColor: theme.MenuNavigatorBottom }]}>
+                            <TextInput
+                                placeholder="As a Business Development Executive, you play a pivotal role in our organization's growth and success.  identify and capitalize on new business opportunities, foster partnerships, and enhance our market presence."
+                                numberOfLines={5}
+                                multiline={true}
+                                keyboardType="text"
+                                placeholderTextColor={theme.Primary}
+                                fontFamily={FontDirectory.interRegular}
+                                size={14}
+                                style={[commonStyles.input, { color: theme.PrimaryText }]}
+                                value={gender}
+                                onChangeText={( text ) => { setGender( text ) }}
+                            />
+                        </View>
+
+
+                        <CustomText title={"About"} fontFamily={FontDirectory.robotoMedium} fontSize={14} color={theme.Text1} style={commonStyles.inputHeader} />
+                        <View style={[commonStyles.longInputOuterContainer, { backgroundColor: theme.MenuNavigatorBottom }]}>
+                            <TextInput
+                                placeholder="As a Business Development Executive, you play a pivotal role in our organization's growth and success.  identify and capitalize on new business opportunities, foster partnerships, and enhance our market presence."
+                                numberOfLines={5}
+                                multiline={true}
+                                keyboardType="text"
+                                placeholderTextColor={theme.Primary}
+                                fontFamily={FontDirectory.interRegular}
+                                size={14}
+                                style={[commonStyles.input, { color: theme.PrimaryText }]}
+                                value={about}
+                                onChangeText={( text ) => { setAbout( text ) }}
+                            />
+                        </View>
+
+
+                        <CustomText title={"Requirements"} fontFamily={FontDirectory.robotoMedium} fontSize={14} color={theme.Text1} style={commonStyles.inputHeader} />
+                        <View style={[commonStyles.longInputOuterContainer, { backgroundColor: theme.MenuNavigatorBottom }]}>
+                            <TextInput
+                                placeholder="As a Business Development Executive, you play a pivotal role in our organization's growth and success.  identify and capitalize on new business opportunities, foster partnerships, and enhance our market presence."
+                                numberOfLines={5}
+                                multiline={true}
+                                keyboardType="text"
+                                placeholderTextColor={theme.Primary}
+                                fontFamily={FontDirectory.interRegular}
+                                size={14}
+                                style={[commonStyles.input, { color: theme.PrimaryText }]}
+                                value={requirements}
+                                onChangeText={( text ) => { setRequirements( text ) }}
+                            />
                         </View>
 
 
 
+
+
+
+
+
+
+
+
+
+
+
                         <CustomButton title="Create" style={{ height: 40, marginTop: 20 }} onPress={() => setModalVisible( true )} />
-                        <DatePicker
+                        < DatePicker
                             modal
                             mode="datetime"
-                            open={open}
-                            date={jobDateTime}
+                            open={open > -1}
+                            date={jobDateTime[open] ? jobDateTime[open] : new Date()}
                             onConfirm={( date ) => {
-                                setOpen( false )
-                                setJobDateTime( date )
+
+                                let tempJobDateTimeList = [...jobDateTime]
+                                tempJobDateTimeList[open] = date
+                                setOpen( -1 )
+                                setJobDateTime( tempJobDateTimeList )
                             }}
                             onCancel={() => {
-                                setOpen( false )
+                                setOpen( -1 )
                             }}
                         />
+
 
 
 

@@ -65,6 +65,15 @@ const commonStyles = StyleSheet.create( {
         paddingHorizontal: 8,
         marginTop: 6
     },
+    longInputOuterContainer: {
+        flexDirection: 'row',
+        width: windowWidth * 0.88,
+        borderRadius: 10,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal: 8,
+        marginTop: 6
+    },
 
     input: {
         flex: 1,

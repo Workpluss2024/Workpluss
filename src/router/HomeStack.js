@@ -19,7 +19,7 @@ const Stack = createStackNavigator();
 export default function HomeStack() {
     return (
         <Stack.Navigator
-            initialRouteName='MainHome'
+            initialRouteName='PostJobPage'
             screenOptions={{
                 headerShown: false,
                 gestureEnabled: false,
