@@ -50,11 +50,15 @@ const NameConfirmationPage = ( props ) => {
 
     const theme = useSelector( ( state ) => state.theme?.theme )
 
-    const LANGUAGE_LIST = ["Yes", "No"]
+    const CONFIRMATION_LIST = ["Yes", "No"]
 
-    const [selectedLanguage, setSelectedLanguage] = useState( "Yes" )
+    const [selectedOption, setSelectedOption] = useState( "Yes" )
     const handleNext = () => {
-        props.navigation.navigate( "BirthPlaceInput" )
+        if ( selectedOption == "Yes" ) {
+            props.navigation.navigate( "BirthPlaceInput", { ...props?.route?.params } )
+        } else {
+            props?.navigation?.goBack()
+        }
     }
 
     return (
@@ -74,25 +78,26 @@ const NameConfirmationPage = ( props ) => {
 
                 <View style={commonStyles.contentContainer}>
                     <View style={{ flex: 1 }} />
+                    <CustomText title={JSON.stringify( props?.route?.params )} fontFamily={FontDirectory.PoppinsMedium} fontSize={14} color={theme.Primary} />
 
                     <CustomText fontSize={14} title="Name matches your Aadhar card ?" color={theme.Primary} fontFamily={FontDirectory.PoppinsMedium}
                         style={{ alignSelf: 'flex-start', marginLeft: windowWidth * 0.06, marginBottom: 12 }} />
                     <View style={{ flex: 2 }}>
-                        {LANGUAGE_LIST?.map( ( eachLanguage, index ) => {
+                        {CONFIRMATION_LIST?.map( ( eachOption, index ) => {
 
-                            const isSelected = eachLanguage == selectedLanguage
+                            const isSelected = eachOption == selectedOption
                             return (
                                 <TouchableOpacity
-                                    onPress={() => setSelectedLanguage( eachLanguage )}
+                                    onPress={() => setSelectedOption( eachOption )}
                                     key={index}
                                     style={[styles?.languageButtonContainer, isSelected && { backgroundColor: theme.SecondaryBackground }, true && { borderColor: theme.SecondaryBackground, borderWidth: 2 }]}>
                                     <RadioButton
                                         value="first"
                                         color={theme.Primary}
                                         status={isSelected ? 'checked' : 'unchecked'}
-                                        onPress={() => setSelectedLanguage( eachLanguage )}
+                                        onPress={() => setSelectedOption( eachOption )}
                                     />
-                                    <CustomText fontSize={16} style={{ marginLeft: 12 }} title={eachLanguage} color={isSelected ? theme.PrimaryText : theme.PrimaryBackground} fontFamily={FontDirectory.PoppinsMedium} />
+                                    <CustomText fontSize={16} style={{ marginLeft: 12 }} title={eachOption} color={isSelected ? theme.PrimaryText : theme.PrimaryBackground} fontFamily={FontDirectory.PoppinsMedium} />
                                     {/* <View style={[styles?.languageCheckContainer, { backgroundColor: isSelected ? theme.PrimaryText : theme.PrimaryBackground }]}>
                                             <Feather name="check" size={10} color={isSelected ? theme.PrimaryBackground : theme.PrimaryText} />
                                         </View> */}

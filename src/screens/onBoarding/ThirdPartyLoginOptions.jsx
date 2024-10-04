@@ -57,7 +57,7 @@ const ThirdPartyLoginOptions = ( props ) => {
 
 
     const handleNext = () => {
-        props.navigation.navigate( "PhoneEmailInputPage" )
+        props.navigation.navigate( "PhoneEmailInputPage", { ...props?.route?.params } )
     }
 
     return (
@@ -69,6 +69,7 @@ const ThirdPartyLoginOptions = ( props ) => {
             <SafeAreaView style={commonStyles.onBoardingSafeArea}>
 
                 <View style={commonStyles.contentContainer}>
+                    <CustomText title={JSON.stringify( props?.route?.params )} fontFamily={FontDirectory.PoppinsMedium} fontSize={14} color={theme.Primary} />
                     <View style={styles.loginOptionsContainer}>
 
                         <TouchableOpacity style={styles.loginButton} onPress={() => handleNext()}>

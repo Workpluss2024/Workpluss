@@ -5,7 +5,7 @@
  * @format
  */
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 
 import {
     StyleSheet,
@@ -41,6 +41,10 @@ import { RadioButton } from 'react-native-paper';
 import { Searchbar } from 'react-native-paper';
 import SkipForNowComponent from '../../customComponents/SkipForNowComponent';
 import TopProgressBar from '../../customComponents/TopProgressBar';
+import axiosPOST from '../../commonMethods/axiosPOST';
+import endPoints from '../../assets/api/endPoints';
+import axiosGET from '../../commonMethods/axiosGET';
+import moment from 'moment';
 
 const windowWidth = Dimensions.get( 'window' ).width;
 const windowHeight = Dimensions.get( 'window' ).height;
@@ -52,9 +56,46 @@ const WorkPreference = ( props ) => {
 
     const LANGUAGE_LIST = ["Flexible (Daily Jobs)", "Steady (Long term jobs)"]
 
-    const [selectedLanguage, setSelectedLanguage] = useState( "Flexible (Daily Jobs)" )
-    const handleNext = () => {
-        props.navigation.navigate( "GeneralAgreement" )
+    const [selectedWorkPreference, setSelectedWorkPreference] = useState( "Flexible (Daily Jobs)" )
+
+    const [WorkPreferences, setWorkPreferences] = useState( [] )
+
+
+
+
+    const fetchWorkPreferences = async () => {
+        const workPreferenceList = await axiosGET( endPoints?.WORK_PREFERENCE_LIST )
+        setWorkPreferences( workPreferenceList )
+    }
+
+    useEffect( () => {
+        fetchWorkPreferences()
+    }, [] )
+    const handleNext = async () => {
+
+        console.log( props?.route?.params )
+
+        const dataToPost = {
+            ...props?.route?.params,
+            // dateOfBirth: moment( props?.route?.params?.dateOfBirth ).format( "DD-MM-YYYY" ),
+            // dateOfBirth: new Date( Date.parse( moment( props?.route?.params?.dateOfBirth ).format( "DD-MM-YYYY" ) ) ),
+            dateOfBirth: null,
+            workPreference: selectedWorkPreference,
+            password: "kjhjh"
+        }
+        const userCreateResponse = await axiosPOST( endPoints?.SIGNUP, dataToPost )
+
+        console.log( userCreateResponse )
+
+        if ( userCreateResponse ) {
+            props.navigation.navigate( "GeneralAgreement" )
+
+        }
+
+
+
+
+
     }
 
     return (
@@ -72,44 +113,47 @@ const WorkPreference = ( props ) => {
                 </View>
                 <TopProgressBar totalPageCount={10} completedPage={8} />
 
-                    <View style={commonStyles.contentContainer}>
-                        <View style={{ flex: 1 }} />
+                <View style={commonStyles.contentContainer}>
+
+                    <CustomText title={JSON.stringify( props?.route?.params )} fontFamily={FontDirectory.PoppinsMedium} fontSize={14} color={theme.Primary} />
+
+                    <View style={{ flex: 1 }} />
 
 
-                        <View style={{ flex: 2 }}>
-                            {LANGUAGE_LIST?.map( ( eachLanguage, index ) => {
+                    <View style={{ flex: 2 }}>
+                        {WorkPreferences?.map( ( eachWorkPreference, index ) => {
 
-                                const isSelected = eachLanguage == selectedLanguage
-                                return (
-                                    <TouchableOpacity
-                                        onPress={() => setSelectedLanguage( eachLanguage )}
-                                        key={index}
-                                        style={[styles?.languageButtonContainer, isSelected && { backgroundColor: theme.SecondaryBackground }, true && { borderColor: theme.SecondaryBackground, borderWidth: 2 }]}>
-                                        <RadioButton
-                                            value="first"
-                                            color={theme.Primary}
-                                            status={isSelected ? 'checked' : 'unchecked'}
-                                            onPress={() => setSelectedLanguage( eachLanguage )}
-                                        />
-                                        <CustomText fontSize={16} style={{ marginLeft: 12 }} title={eachLanguage} color={isSelected ? theme.PrimaryText : theme.PrimaryBackground} fontFamily={FontDirectory.PoppinsMedium} />
-                                        {/* <View style={[styles?.languageCheckContainer, { backgroundColor: isSelected ? theme.PrimaryText : theme.PrimaryBackground }]}>
+                            const isSelected = eachWorkPreference?.id == selectedWorkPreference?.id
+                            return (
+                                <TouchableOpacity
+                                    onPress={() => setSelectedWorkPreference( eachWorkPreference )}
+                                    key={index}
+                                    style={[styles?.languageButtonContainer, isSelected && { backgroundColor: theme.SecondaryBackground }, true && { borderColor: theme.SecondaryBackground, borderWidth: 2 }]}>
+                                    <RadioButton
+                                        value="first"
+                                        color={theme.Primary}
+                                        status={isSelected ? 'checked' : 'unchecked'}
+                                        onPress={() => setSelectedWorkPreference( eachWorkPreference )}
+                                    />
+                                    <CustomText fontSize={16} style={{ marginLeft: 12 }} title={eachWorkPreference?.name} color={isSelected ? theme.PrimaryText : theme.PrimaryBackground} fontFamily={FontDirectory.PoppinsMedium} />
+                                    {/* <View style={[styles?.languageCheckContainer, { backgroundColor: isSelected ? theme.PrimaryText : theme.PrimaryBackground }]}>
                                             <Feather name="check" size={10} color={isSelected ? theme.PrimaryBackground : theme.PrimaryText} />
                                         </View> */}
-                                    </TouchableOpacity>
-                                )
-                            } )}
+                                </TouchableOpacity>
+                            )
+                        } )}
 
 
-                        </View>
-
-
-
-
-                        <View style={{ alignItems: 'center', width: windowWidth, flex: 2 }}>
-                            <CustomButton title="Next" fontSize={16} dflt={true} style={{ marginBottom: 18, width: windowWidth * 0.9 }} onPress={handleNext} />
-                            <SkipForNowComponent />
-                        </View>
                     </View>
+
+
+
+
+                    <View style={{ alignItems: 'center', width: windowWidth, flex: 2 }}>
+                        <CustomButton title="Next" fontSize={16} dflt={true} style={{ marginBottom: 18, width: windowWidth * 0.9 }} onPress={handleNext} />
+                        <SkipForNowComponent />
+                    </View>
+                </View>
 
 
 

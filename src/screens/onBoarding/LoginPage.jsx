@@ -43,21 +43,28 @@ import { RadioButton } from 'react-native-paper';
 import { Searchbar } from 'react-native-paper';
 import SkipForNowComponent from '../../customComponents/SkipForNowComponent';
 import TopProgressBar from '../../customComponents/TopProgressBar';
+import axiosPOST from '../../commonMethods/axiosPOST';
+import endPoints from '../../assets/api/endPoints';
 
 const windowWidth = Dimensions.get( 'window' ).width;
 const windowHeight = Dimensions.get( 'window' ).height;
 
 
-const FullNameInput = ( props ) => {
+const LoginPage = ( props ) => {
 
     const theme = useSelector( ( state ) => state.theme?.theme )
 
-    const [firstName, setFirstName] = useState( '' )
-    const [lastName, SetLastName] = useState( '' )
+    const [email, setEmail] = useState( '' )
+    const [password, setPassword] = useState( '' )
 
 
-    const handleNext = () => {
-        props.navigation.navigate( "NameConfirmationPage", { ...props?.route?.params, firstName: firstName, lastName: lastName } )
+    const handleLogin = async () => {
+        const dataToPost = {
+            email: email,
+            password: password
+        }
+        const loginResponse = await axiosPOST( endPoints?.LOGIN, dataToPost )
+        console.log( loginResponse )
     }
 
     return (
@@ -71,9 +78,9 @@ const FullNameInput = ( props ) => {
                     <TouchableOpacity>
                         <FontAwesome5 name="chevron-left" color={theme.Primary} size={24} style={commonStyles.headerLeftArrow} />
                     </TouchableOpacity>
-                    <CustomText title="Name" fontFamily={FontDirectory.poppinsBold} color={theme.Primary} fontSize={24} />
+                    <CustomText title="Login" fontFamily={FontDirectory.poppinsBold} color={theme.Primary} fontSize={24} />
                 </View>
-                <TopProgressBar totalPageCount={10} completedPage={4} />
+                {/* <TopProgressBar totalPageCount={10} completedPage={4} /> */}
                 <ScrollView style={commonStyles.scrollViewContainer}>
 
                     <View style={[commonStyles.contentContainer, { minHeight: windowHeight - 65 }]}>
@@ -86,28 +93,29 @@ const FullNameInput = ( props ) => {
                                 {/* <CustomText title="Name" fontFamily={FontDirectory.PoppinsMedium} fontSize={14} color={theme.Primary} /> */}
                                 <View style={[styles.inputOuterContainer, { backgroundColor: theme.SecondaryBackground }]}>
                                     <TextInput
-                                        placeholder="First name"
-                                        keyboardType="text"
+                                        placeholder="Email"
+                                        keyboardType="email"
                                         placeholderTextColor={theme.Primary}
                                         fontFamily={FontDirectory.interRegular}
                                         size={14}
                                         style={styles.input}
-                                        value={firstName}
+                                        value={email}
                                         color={theme.Primary}
-                                        onChangeText={( text ) => { setFirstName( text ) }}
+                                        onChangeText={( text ) => { setEmail( text ) }}
                                     />
                                 </View>
                                 <View style={[styles.inputOuterContainer, { backgroundColor: theme.SecondaryBackground }]}>
                                     <TextInput
-                                        placeholder="Last name"
-                                        keyboardType="text"
+                                        placeholder="Password"
+                                        keyboardType="password"
                                         placeholderTextColor={theme.Primary}
                                         fontFamily={FontDirectory.interRegular}
+                                        secureTextEntry
                                         size={14}
                                         style={styles.input}
-                                        value={lastName}
+                                        value={password}
                                         color={theme.Primary}
-                                        onChangeText={( text ) => { SetLastName( text ) }}
+                                        onChangeText={( text ) => { setPassword( text ) }}
                                     />
                                 </View>
                             </View>
@@ -115,12 +123,12 @@ const FullNameInput = ( props ) => {
 
                         <View style={{ flex: 1 }}>
 
-                            <CustomButton fontSize={18} onPress={handleNext} title="Next" dflt style={{
+                            <CustomButton fontSize={18} onPress={handleLogin} title="Login" dflt style={{
                                 width: windowWidth * 0.88,
                                 marginBottom: 18
                             }} />
 
-                            <SkipForNowComponent style={{ marginBottom: 25 }} />
+                            {/* <SkipForNowComponent style={{ marginBottom: 25 }} /> */}
                         </View>
                     </View>
                 </ScrollView>
@@ -135,7 +143,7 @@ const FullNameInput = ( props ) => {
 
 
 
-export default FullNameInput;
+export default LoginPage;
 
 
 

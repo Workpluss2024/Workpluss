@@ -52,14 +52,21 @@ const RegistrationAddress = ( props ) => {
 
     const theme = useSelector( ( state ) => state.theme?.theme )
 
-    const LANGUAGE_LIST = ["English", "Hindi", "Marathi"]
+    const [streetName, setStreetName] = useState( '' )
+    const [doorNumber, setDoorNumber] = useState( '' )
+    const [nearBy, setNearBy] = useState( '' )
+    const [state, setState] = useState( '' )
+    const [city, setCity] = useState( '' )
+    const [zipCode, setZipCode] = useState( '' )
 
-    const [selectedLanguage, setSelectedLanguage] = useState( "English" )
 
-    const [searchQuery, setSearchQuery] = useState( '' );
+
+
+
+
 
     const handleNext = () => {
-        props.navigation.navigate( "GenderSelect" )
+        props.navigation.navigate( "GenderSelect", { ...props?.route?.params, streetName: streetName, doorNumber: doorNumber, nearBy: nearBy, state: state, city: city, zipCode: zipCode } )
     }
 
 
@@ -86,6 +93,7 @@ const RegistrationAddress = ( props ) => {
 
                         <View style={styles.container}>
                             <View>
+                                <CustomText title={JSON.stringify( props?.route?.params )} fontFamily={FontDirectory.PoppinsMedium} fontSize={14} color={theme.Primary} />
                                 <CustomText title="Address" fontFamily={FontDirectory.PoppinsMedium} fontSize={14} color={theme.Primary} />
                                 <View style={[styles.inputOuterContainer, { backgroundColor: theme.SecondaryBackground }]}>
                                     <TextInput
@@ -94,7 +102,10 @@ const RegistrationAddress = ( props ) => {
                                         placeholderTextColor={theme.Primary}
                                         fontFamily={FontDirectory.interRegular}
                                         size={14}
+                                        color={theme.Primary}
                                         style={styles.input}
+                                        value={streetName}
+                                        onChangeText={( text ) => { setStreetName( text ) }}
                                     />
                                 </View>
                                 <View style={[styles.inputOuterContainer, { backgroundColor: theme.SecondaryBackground }]}>
@@ -104,7 +115,10 @@ const RegistrationAddress = ( props ) => {
                                         placeholderTextColor={theme.Primary}
                                         fontFamily={FontDirectory.interRegular}
                                         size={14}
+                                        color={theme.Primary}
                                         style={styles.input}
+                                        value={doorNumber}
+                                        onChangeText={( text ) => { setDoorNumber( text ) }}
                                     />
                                 </View>
                                 <View style={[styles.inputOuterContainer, { backgroundColor: theme.SecondaryBackground }]}>
@@ -114,7 +128,10 @@ const RegistrationAddress = ( props ) => {
                                         placeholderTextColor={theme.Primary}
                                         fontFamily={FontDirectory.interRegular}
                                         size={14}
+                                        color={theme.Primary}
                                         style={styles.input}
+                                        value={nearBy}
+                                        onChangeText={( text ) => { setNearBy( text ) }}
                                     />
                                 </View>
                             </View>
@@ -130,7 +147,10 @@ const RegistrationAddress = ( props ) => {
                                         placeholderTextColor={theme.Primary}
                                         fontFamily={FontDirectory.interRegular}
                                         size={14}
+                                        color={theme.Primary}
                                         style={styles.input}
+                                        value={state}
+                                        onChangeText={( text ) => { setState( text ) }}
                                     />
                                 </View>
                             </View>
@@ -143,7 +163,10 @@ const RegistrationAddress = ( props ) => {
                                         placeholderTextColor={theme.Primary}
                                         fontFamily={FontDirectory.interRegular}
                                         size={14}
+                                        color={theme.Primary}
                                         style={styles.input}
+                                        value={city}
+                                        onChangeText={( text ) => { setCity( text ) }}
                                     />
                                 </View>
                             </View>
@@ -157,6 +180,9 @@ const RegistrationAddress = ( props ) => {
                                         fontFamily={FontDirectory.interRegular}
                                         size={14}
                                         style={styles.input}
+                                        value={zipCode}
+                                        color={theme.Primary}
+                                        onChangeText={( text ) => { setZipCode( text ) }}
                                     />
                                 </View>
                             </View>

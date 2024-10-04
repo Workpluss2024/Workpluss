@@ -5,7 +5,7 @@
  * @format
  */
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 
 import {
     StyleSheet,
@@ -41,6 +41,8 @@ import { RadioButton } from 'react-native-paper';
 import { Searchbar } from 'react-native-paper';
 import SkipForNowComponent from '../../customComponents/SkipForNowComponent';
 import TopProgressBar from '../../customComponents/TopProgressBar';
+import axiosGET from '../../commonMethods/axiosGET';
+import endPoints from '../../assets/api/endPoints';
 
 const windowWidth = Dimensions.get( 'window' ).width;
 const windowHeight = Dimensions.get( 'window' ).height;
@@ -50,14 +52,26 @@ const GenderSelect = ( props ) => {
 
     const theme = useSelector( ( state ) => state.theme?.theme )
 
-    const LANGUAGE_LIST = ["Female", "Male", "Diverse"]
+    const [genderList, setGenderList] = useState( [] )
 
-    const [selectedLanguage, setSelectedLanguage] = useState( "Female" )
+    const [selectedGender, setSelectedGender] = useState( "Female" )
+
+
+
+    const fetchGenderList = async () => {
+        const responseGenderList = await axiosGET( endPoints?.GENDER_LIST )
+        setGenderList( responseGenderList )
+    }
+
+    useEffect( () => {
+        fetchGenderList()
+    }, [] )
+
 
     const [searchQuery, setSearchQuery] = useState( '' );
 
     const handleNext = () => {
-        props.navigation.navigate( "FullNameInput" )
+        props.navigation.navigate( "FullNameInput", { ...props?.route?.params, gender: selectedGender } )
     }
 
     return (
@@ -76,24 +90,26 @@ const GenderSelect = ( props ) => {
                 <TopProgressBar totalPageCount={10} completedPage={3} />
 
                 <View style={commonStyles.contentContainer}>
+                    <CustomText title={JSON.stringify( props?.route?.params )} fontFamily={FontDirectory.PoppinsMedium} fontSize={14} color={theme.Primary} />
+
                     <View style={{ flex: 1 }} />
 
                     <View style={{ flex: 3 }}>
-                        {LANGUAGE_LIST?.map( ( eachLanguage, index ) => {
+                        {genderList?.map( ( eachGender, index ) => {
 
-                            const isSelected = eachLanguage == selectedLanguage
+                            const isSelected = eachGender?.id == selectedGender?.id
                             return (
                                 <TouchableOpacity
-                                    onPress={() => setSelectedLanguage( eachLanguage )}
+                                    onPress={() => setSelectedGender( eachGender )}
                                     key={index}
                                     style={[styles?.languageButtonContainer, isSelected && { backgroundColor: theme.SecondaryBackground }, true && { borderColor: theme.SecondaryBackground, borderWidth: 2 }]}>
                                     <RadioButton
                                         value="first"
                                         color={theme.Primary}
                                         status={isSelected ? 'checked' : 'unchecked'}
-                                        onPress={() => setSelectedLanguage( eachLanguage )}
+                                        onPress={() => setSelectedGender( eachGender )}
                                     />
-                                    <CustomText fontSize={16} style={{ marginLeft: 12 }} title={eachLanguage} color={isSelected ? theme.PrimaryText : theme.PrimaryBackground} fontFamily={FontDirectory.PoppinsMedium} />
+                                    <CustomText fontSize={16} style={{ marginLeft: 12 }} title={eachGender?.name} color={isSelected ? theme.PrimaryText : theme.PrimaryBackground} fontFamily={FontDirectory.PoppinsMedium} />
                                     {/* <View style={[styles?.languageCheckContainer, { backgroundColor: isSelected ? theme.PrimaryText : theme.PrimaryBackground }]}>
                                             <Feather name="check" size={10} color={isSelected ? theme.PrimaryBackground : theme.PrimaryText} />
                                         </View> */}

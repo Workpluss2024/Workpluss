@@ -57,7 +57,10 @@ const CreateAnAccount = ( props ) => {
 
 
     const handleNext = () => {
-        props.navigation.navigate( "ThirdPartyLoginOptions" )
+        props.navigation.navigate( "PhoneEmailInputPage", { ...props?.route?.params } )
+    }
+    const handleLogin = () => {
+        props.navigation.navigate( "LoginPage", { ...props?.route?.params } )
     }
 
     return (
@@ -68,8 +71,9 @@ const CreateAnAccount = ( props ) => {
         >
             <SafeAreaView style={commonStyles.onBoardingSafeArea}>
                 {/* <ScrollView style={commonStyles.scrollViewContainer}> */}
-
                 <View style={commonStyles.contentContainer}>
+                    <CustomText title={JSON.stringify( props?.route?.params )} fontFamily={FontDirectory.PoppinsMedium} fontSize={14} color={theme.Primary} />
+
                     <CustomText title="Create an Account" fontFamily={FontDirectory.poppinsBold} fontSize={24} color={theme.Primary} />
                     <TouchableOpacity
                         onPress={() => handleNext()}
@@ -85,7 +89,7 @@ const CreateAnAccount = ( props ) => {
 
                     </TouchableOpacity>
                 </View>
-                <SkipForNowComponent absolute onSkip={() => handleNext()} />
+                <SkipForNowComponent absolute onSkip={() => handleLogin()} login />
                 {/* </ScrollView> */}
 
 

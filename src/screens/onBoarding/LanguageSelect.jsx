@@ -5,7 +5,7 @@
  * @format
  */
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 
 import {
     StyleSheet,
@@ -39,6 +39,8 @@ import { RadioButton } from 'react-native-paper';
 
 
 import { Searchbar } from 'react-native-paper';
+import axiosGET from '../../commonMethods/axiosGET';
+import endPoints from '../../assets/api/endPoints';
 
 const windowWidth = Dimensions.get( 'window' ).width;
 const windowHeight = Dimensions.get( 'window' ).height;
@@ -46,16 +48,28 @@ const windowHeight = Dimensions.get( 'window' ).height;
 
 const LanguageSelect = ( props ) => {
 
+
+
+    const fetchLanguageList = async () => {
+        const languageResponseList = await axiosGET( endPoints.LANGUAGE_LIST )
+        console.log( languageResponseList )
+        setSelectedLanguage( languageResponseList[0] )
+
+        setLanguageList( languageResponseList )
+    }
+
+    useEffect( () => {
+        fetchLanguageList()
+    }, [] )
     const theme = useSelector( ( state ) => state.theme?.theme )
 
-    const LANGUAGE_LIST = ["English", "Hindi", "Marathi"]
-
+    const [languageList, setLanguageList] = useState( [] )
     const [selectedLanguage, setSelectedLanguage] = useState( "English" )
 
     const [searchQuery, setSearchQuery] = useState( '' );
 
     const handleNext = () => {
-        props.navigation.navigate( "CreateAnAccount" )
+        props.navigation.navigate( "CreateAnAccount", { language: selectedLanguage } )
     }
 
     return (
@@ -71,9 +85,9 @@ const LanguageSelect = ( props ) => {
                     <CustomText title="Choose your Language" fontFamily={FontDirectory.poppinsBold} fontSize={24} color={theme.Primary} />
 
                     <View style={{ marginTop: windowHeight * 0.05 }}>
-                        <CustomText title="Language won’t be a barrier for your goals !" fontFamily={FontDirectory.PoppinsRegular} fontSize={15} color={theme.Primary} />
+                        <CustomText title="Language won’t be a barrier for your goals !" fontFamily={FontDirectory.PoppinsRegular} fontSize={15} color={theme.Primary} style={{ marginBottom: 12 }} />
 
-                        <Searchbar
+                        {/* <Searchbar
                             placeholder="Search"
                             iconColor={theme.Accent4}
                             onChangeText={setSearchQuery}
@@ -92,16 +106,16 @@ const LanguageSelect = ( props ) => {
                                 fontSize: 16,
                                 marginTop: -6
                             }}
-                        />
-                        {LANGUAGE_LIST?.map( ( eachLanguage, index ) => {
+                        /> */}
+                        {languageList?.map( ( eachLanguage, index ) => {
 
-                            const isSelected = eachLanguage == selectedLanguage
+                            const isSelected = eachLanguage?.id == selectedLanguage?.id
                             return (
                                 <TouchableOpacity
                                     onPress={() => setSelectedLanguage( eachLanguage )}
                                     key={index}
                                     style={[styles?.languageButtonContainer, isSelected && { backgroundColor: theme.SecondaryBackground }, true && { borderColor: theme.SecondaryBackground, borderWidth: 2 }]}>
-                                    <CustomText fontSize={16} title={eachLanguage} color={isSelected ? theme.PrimaryText : theme.PrimaryBackground} fontFamily={FontDirectory.PoppinsMedium} />
+                                    <CustomText fontSize={16} title={eachLanguage?.name} color={isSelected ? theme.PrimaryText : theme.PrimaryBackground} fontFamily={FontDirectory.PoppinsMedium} />
                                     <View style={[styles?.languageCheckContainer, { backgroundColor: isSelected ? theme.PrimaryText : theme.PrimaryBackground }]}>
                                         <Feather name="check" size={10} color={isSelected ? theme.PrimaryBackground : theme.PrimaryText} />
                                     </View>

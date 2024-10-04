@@ -44,6 +44,8 @@ import { RadioButton } from 'react-native-paper';
 import { Searchbar } from 'react-native-paper';
 import SkipForNowComponent from '../../customComponents/SkipForNowComponent';
 import TopProgressBar from '../../customComponents/TopProgressBar';
+import axiosPOST from '../../commonMethods/axiosPOST';
+import endPoints from '../../assets/api/endPoints';
 
 const windowWidth = Dimensions.get( 'window' ).width;
 const windowHeight = Dimensions.get( 'window' ).height;
@@ -53,8 +55,8 @@ const PhoneEmailInputPage = ( props ) => {
 
     const theme = useSelector( ( state ) => state.theme?.theme )
 
-    const [emailOtpEnabled, setEmailOtpEnabled] = useState( '' )
-    const [phoneOtpEnabled, setPhoneOtpEnabled] = useState( '' )
+    const [emailOtpEnabled, setEmailOtpEnabled] = useState( false )
+    const [phoneOtpEnabled, setPhoneOtpEnabled] = useState( false )
 
     const [email, setEmail] = useState( '' )
     const [phone, setPhone] = useState( '' )
@@ -67,24 +69,40 @@ const PhoneEmailInputPage = ( props ) => {
 
 
     const handleNext = () => {
-        props.navigation.navigate( "RegistrationAddress" )
+        props.navigation.navigate( "RegistrationAddress", { ...props?.route?.params, email: email, phone: phone } )
     }
 
 
-    const handleSendEmailOTP = () => {
+    const handleSendEmailOTP = async () => {
+        const dataToPost = {
+            email: email
+        }
+        const sendEmailOtpResponse = await axiosPOST( endPoints.SEND_EMAIL_OTP, dataToPost )
+        console.log( sendEmailOtpResponse )
         setEmailOtpEnabled( true )
 
         // TODO: Trigger the send email OTP
     }
-    const handleSendPhoneOTP = () => {
+    const handleSendPhoneOTP = async () => {
+        const dataToPost = {
+            phoneNumber: phone
+        }
+        const sendPhoneOtpResponse = await axiosPOST( endPoints.SEND_PHONE_OTP, dataToPost )
+        console.log( sendPhoneOtpResponse )
         setPhoneOtpEnabled( true )
 
         // TODO: Trigger the send phone OTP
     }
-    const onChangeEmailInput = ( text ) => {
+    const onChangeEmailInput = async ( text ) => {
         if ( emailOtpEnabled ) {
             //Email OTP case
             if ( text.length == 6 ) {
+                const dataToPost = {
+                    email: email,
+                    otp: text
+                }
+                const verifyEmailOTPResponse = await axiosPOST( endPoints.VERIFY_OTP, dataToPost )
+                console.log( verifyEmailOTPResponse )
                 if ( text == "000000" ) {
                     setEmailVerificationStatus( "VERIFIED" )
                 } else {
@@ -97,11 +115,17 @@ const PhoneEmailInputPage = ( props ) => {
             setEmail( text )
         }
     }
-    const onChangePhoneInput = ( text ) => {
+    const onChangePhoneInput = async ( text ) => {
         if ( phoneOtpEnabled ) {
             //Phone OTP case
             console.log( text )
             if ( text.length == 6 ) {
+                const dataToPost = {
+                    phoneNumber: phone,
+                    otp: text
+                }
+                const verifyPhoneOTPResponse = await axiosPOST( endPoints.VERIFY_OTP, dataToPost )
+                console.log( verifyPhoneOTPResponse )
                 if ( text == "000000" ) {
                     setPhoneVerificationStatus( "VERIFIED" )
                 } else {
@@ -133,6 +157,9 @@ const PhoneEmailInputPage = ( props ) => {
                 <ScrollView style={commonStyles.scrollViewContainer}>
 
                     <View style={[commonStyles.contentContainer, { minHeight: windowHeight - 65 }]}>
+
+                        <CustomText title={JSON.stringify( props?.route?.params )} fontFamily={FontDirectory.PoppinsMedium} fontSize={14} color={theme.Primary} />
+
 
                         {/* <View style={{ flex: 1 }} /> */}
 
@@ -181,7 +208,7 @@ const PhoneEmailInputPage = ( props ) => {
 
 
                             <View style={{ marginTop: 24 }}>
-                                <CustomText title="Phone Number" fontFamily={FontDirectory.PoppinsMedium} fontSize={14} color={theme.Primary} />
+                                <CustomText title={phoneOtpEnabled ? phone : "Phone Number"} fontFamily={FontDirectory.PoppinsMedium} fontSize={14} color={theme.Primary} />
                                 <View style={[styles.inputOuterContainer, { backgroundColor: theme.SecondaryBackground }]}>
                                     <TextInput
                                         placeholder={phoneOtpEnabled ? "XXXXXX" : "+91 XXXXXXXXXX"}
@@ -194,7 +221,6 @@ const PhoneEmailInputPage = ( props ) => {
                                         size={14}
                                         style={styles.input}
                                     />
-
                                     {phoneVerificationStatus == "INPUT" && <TouchableOpacity
                                         mode="contained"
                                         onPress={() => handleSendPhoneOTP()}
@@ -218,7 +244,6 @@ const PhoneEmailInputPage = ( props ) => {
                                 style={{
                                     textAlign: 'center',
                                     marginTop: 24
-
                                 }}
                             />}
                         </View>

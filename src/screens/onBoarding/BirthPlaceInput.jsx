@@ -36,6 +36,8 @@ import FontDirectory from '../../assets/FontDirectory';
 import CustomDots from '../../customComponents/CustomDots';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
+import DatePicker from 'react-native-date-picker'
+
 
 import { RadioButton } from 'react-native-paper';
 
@@ -43,6 +45,7 @@ import { RadioButton } from 'react-native-paper';
 import { Searchbar } from 'react-native-paper';
 import SkipForNowComponent from '../../customComponents/SkipForNowComponent';
 import TopProgressBar from '../../customComponents/TopProgressBar';
+import moment from 'moment';
 
 const windowWidth = Dimensions.get( 'window' ).width;
 const windowHeight = Dimensions.get( 'window' ).height;
@@ -52,15 +55,17 @@ const BirthPlaceInput = ( props ) => {
 
     const theme = useSelector( ( state ) => state.theme?.theme )
 
-    const LANGUAGE_LIST = ["English", "Hindi", "Marathi"]
+    const [birthCity, setBirthCity] = useState( '' )
+    const [birthCountry, setBirthCountry] = useState( '' )
+    const [dateOfBirth, setDateOfBirth] = useState( new Date() );
 
-    const [selectedLanguage, setSelectedLanguage] = useState( "English" )
 
-    const [searchQuery, setSearchQuery] = useState( '' );
+
+    const [open, setOpen] = useState( false )
 
 
     const handleNext = () => {
-        props.navigation.navigate( "DateOfBirthInput" )
+        props.navigation.navigate( "WorkPreference", { ...props?.route?.params, birthCity: birthCity, birthCountry: birthCountry, dateOfBirth: dateOfBirth } )
     }
     return (
         <ImageBackground
@@ -79,6 +84,8 @@ const BirthPlaceInput = ( props ) => {
                 <ScrollView style={commonStyles.scrollViewContainer}>
 
                     <View style={[commonStyles.contentContainer, { minHeight: windowHeight - 65 }]}>
+                        <CustomText title={JSON.stringify( props?.route?.params )} fontFamily={FontDirectory.PoppinsMedium} fontSize={14} color={theme.Primary} />
+
 
                         <View style={{ flex: 2 }} />
 
@@ -93,6 +100,9 @@ const BirthPlaceInput = ( props ) => {
                                         fontFamily={FontDirectory.interRegular}
                                         size={14}
                                         style={styles.input}
+                                        color={theme.Primary}
+                                        value={birthCity}
+                                        onChangeText={( text ) => { setBirthCity( text ) }}
                                     />
                                 </View>
                             </View>
@@ -106,8 +116,33 @@ const BirthPlaceInput = ( props ) => {
                                         fontFamily={FontDirectory.interRegular}
                                         size={14}
                                         style={styles.input}
+                                        color={theme.Primary}
+                                        value={birthCountry}
+                                        onChangeText={( text ) => { setBirthCountry( text ) }}
                                     />
                                 </View>
+                            </View>
+                            <View style={{ marginTop: 12 }}>
+                                <CustomText title="Date of birth" fontFamily={FontDirectory.PoppinsMedium} fontSize={14} color={theme.Primary} />
+                                <TouchableOpacity
+                                    onPress={() => setOpen( true )}
+                                    style={[styles.inputOuterContainer, { backgroundColor: theme.SecondaryBackground }]}>
+                                    <CustomText title={moment( dateOfBirth ).format( "DD-MM-YYYY" )} color={theme.Primary} fontFamily={FontDirectory.interRegular} fontSize={14} />
+                                </TouchableOpacity>
+
+                                <DatePicker
+                                    modal
+                                    mode="date"
+                                    open={open}
+                                    date={dateOfBirth}
+                                    onConfirm={( date ) => {
+                                        setOpen( false )
+                                        setDateOfBirth( date )
+                                    }}
+                                    onCancel={() => {
+                                        setOpen( false )
+                                    }}
+                                />
                             </View>
 
 

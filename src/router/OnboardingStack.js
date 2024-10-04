@@ -20,6 +20,7 @@ import DateOfBirthInput from '../screens/onBoarding/DateOfBirthInput';
 import WorkPreference from '../screens/onBoarding/WorkPreference';
 import UploadDocuments from '../screens/onBoarding/UploadDocuments';
 import GeneralAgreement from '../screens/onBoarding/GeneralAgreement';
+import LoginPage from '../screens/onBoarding/LoginPage';
 
 
 
@@ -81,6 +82,11 @@ export default function OnboardingStack() {
             <Stack.Screen name="WorkPreference" component={WorkPreference} />
             <Stack.Screen name="GeneralAgreement" component={GeneralAgreement} />
             <Stack.Screen name="UploadDocuments" component={UploadDocuments} />
+
+
+
+
+            <Stack.Screen name="LoginPage" component={LoginPage} />
 
         </Stack.Navigator>
     );
